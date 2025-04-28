@@ -4,10 +4,16 @@ title: Certifications
 permalink: /certifications/
 ---
 
-# My Certifications and Badges
+## Certifications
 
-Here are the certifications and digital badges I’ve earned so far:
-
+- GSEC (GIAC Security Essentials Certification)
+- CompTIA Security+
+- GISF (GIAC Information Security Fundamentals)
+- GFACT (GIAC Foundational Cybersecurity Technologies)
+- CompTIA Network+
+- LE-1: Linux Essentials
+- Microsoft Certified: Azure Fundamentals
+- CompTIA A+
 
 
 ---
