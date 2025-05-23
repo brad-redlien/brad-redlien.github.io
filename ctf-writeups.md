@@ -10,11 +10,6 @@ Welcome! This page showcases the Capture the Flag (CTF) competitions and cyberse
 
 ---
 
-layout: page
-title: CTF Writeups
-permalink: /ctf-writeups/
----
-
 # National Cyber League Spring 2025 CTF
 
 ![NCL Spring 2025 Team Game](assets/img/NCL-Team-Game.png)
