@@ -99,7 +99,9 @@ The next portion of the challenge asked you to identify the Happypotamus’s cro
 
 The Ravelry site linked to a blog post identifying **Lounette Fourie** and **Anita Roussouw** as the African Flower hexagon pattern’s creators. I verified this on multiple websites using the following Google Dork search:
 
-<pre> ```text "African Flower" AND hexagon AND ("Lounette Fourie" OR "Anita Roussouw") ``` </pre>
+```text
+"African Flower" AND hexagon AND ("Lounette Fourie" OR "Anita Roussouw")
+```
 
 ### (3) Original Sales Date
 
@@ -115,4 +117,4 @@ Although I couldn’t find a definitive source stating when the item was first l
 
 ---
 
-This OSINT question provided a fun reverse image and information search challenge. I look forward to applying many of the techniques I learned during this CTF in my home lab.
+This OSINT question provided a fun reverse image and information search challenge. I look forward to applying many of the techniques I learned from this CTF in my home lab.
