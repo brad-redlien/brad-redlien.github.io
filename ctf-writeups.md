@@ -69,4 +69,50 @@ I recovered embedded files to solve this challenge by:
 
 ---
 
-I look forward to applying these and other techniques in my home lab.
+# The “Happypotamus” OSINT Challenge
+
+This NCL OSINT challenge provided the below picture and asked a series of questions, starting with where you can buy this item. Follow-up questions asked you to identify the crochet pattern, who created the pattern, the item’s price, and when it first went on sale.
+
+!(assets/img/1.png)
+
+## Solution Methodology
+
+### (1) Reverse Image Search
+
+I uploaded the image to [TinEye](https://tineye.com/), which is a reverse image search website. TinEye showed the following results:
+
+!(assets/img/2.png)
+
+I followed the first URL to [Ravelry](https://www.ravelry.com/patterns/library/happypotamus-the-happy-hippo), which is a website that allows users to sell crochet patterns. This URL brought me to Heidi Bears’ **“Happypotamus The Happy Hippo”** crochet pattern, where I found the matching image:
+
+!(assets/img/3.png)
+
+Other popular reverse image search sites include:
+
+- [Google Images](https://images.google.com)
+- [Bing Visual Search](https://www.bing.com/visualsearch)
+- [Yandex Images](https://yandex.com/images)
+
+### (2) The Crochet Pattern & Its Creators
+
+The next portion of the challenge asked you to identify the Happypotamus’s crochet pattern and its creators. I solved this by carefully reading the Ravelry webpage and its linked pages. These pages revealed that the Happypotamus pattern uses an **African Flower hexagon motif pattern**.
+
+The Ravelry site linked to a blog post identifying **Lounette Fourie** and **Anita Roussouw** as the African Flower hexagon pattern’s creators. I verified this on multiple websites using the following Google Dork search:
+
+<pre> ```text "African Flower" AND hexagon AND ("Lounette Fourie" OR "Anita Roussouw") ``` </pre>
+
+### (3) Original Sales Date
+
+A tricky question asked when the Happypotamus was first listed for sale. I first reviewed the Ravelry Happypotamus website and saw that the webpage was created and first published in **April 2013**.
+
+!(assets/img/4.png)
+
+I next checked the [Wayback Machine](https://archive.org) and entered the Happypotamus URL, but the first snapshot of the webpage was from **2015**.
+
+!(assets/img/5.png)
+
+Although I couldn’t find a definitive source stating when the item was first listed for sale, the correct answer was **April 21, 2013** (the webpage creation date).
+
+---
+
+This OSINT question provided a fun reverse image and information search challenge. I look forward to applying many of the techniques I learned during this CTF in my home lab.
