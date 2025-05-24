@@ -14,8 +14,7 @@ Welcome! This page showcases the Capture the Flag (CTF) competitions and cyberse
 
 ![NCL Spring 2025 Team Game](assets/img/NCL-Team-Game.png)
 
-I competed with six other SANS classmates in the NCL Spring 2025 Team Game, placing **63rd out of 4,798 teams nationwide**, ranking within the **top 1.3% of all competitors**.  
-The CTF ran from Friday, April 25 through Sunday, April 27.
+I competed with six other SANS classmates in the NCL Spring 2025 Team Game, placing **63rd out of 4,798 teams nationwide**, ranking within the **top 1.3% of all competitors**. The CTF ran from Friday, April 25 through Sunday, April 27.
 
 Throughout the event, I gained hands-on experience across several cybersecurity domains, including log analysis, network scanning and reconnaissance, network traffic analysis, password cracking, and more. I was able to apply many of the techniques I learned from SEC401 (GSEC) and SEC504 (GCIH).
 
