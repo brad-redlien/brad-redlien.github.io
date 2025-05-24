@@ -73,7 +73,7 @@ I recovered embedded files to solve this challenge by:
 
 This NCL OSINT challenge provided the below picture and asked a series of questions, starting with where you can buy this item. Follow-up questions asked you to identify the crochet pattern, who created the pattern, the item’s price, and when it first went on sale.
 
-!(assets/img/1.png)
+![CTF OSINT Image](assets/img/1.png)
 
 ## Solution Methodology
 
@@ -81,11 +81,11 @@ This NCL OSINT challenge provided the below picture and asked a series of questi
 
 I uploaded the image to [TinEye](https://tineye.com/), which is a reverse image search website. TinEye showed the following results:
 
-!(assets/img/2.png)
+![TinEye Reverse Image Search Results](assets/img/2.png)
 
 I followed the first URL to [Ravelry](https://www.ravelry.com/patterns/library/happypotamus-the-happy-hippo), which is a website that allows users to sell crochet patterns. This URL brought me to Heidi Bears’ **“Happypotamus The Happy Hippo”** crochet pattern, where I found the matching image:
 
-!(assets/img/3.png)
+![Revelry Happypotamus Image](assets/img/3.png)
 
 Other popular reverse image search sites include:
 
@@ -105,11 +105,11 @@ The Ravelry site linked to a blog post identifying **Lounette Fourie** and **Ani
 
 A tricky question asked when the Happypotamus was first listed for sale. I first reviewed the Ravelry Happypotamus website and saw that the webpage was created and first published in **April 2013**.
 
-!(assets/img/4.png)
+![Webpage Creation Date](assets/img/4.png)
 
 I next checked the [Wayback Machine](https://archive.org) and entered the Happypotamus URL, but the first snapshot of the webpage was from **2015**.
 
-!(assets/img/5.png)
+![WayBack Machine Screenshot](assets/img/5.png)
 
 Although I couldn’t find a definitive source stating when the item was first listed for sale, the correct answer was **April 21, 2013** (the webpage creation date).
 
