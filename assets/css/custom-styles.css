@@ -1,54 +1,27 @@
-/* Body and Background */
+/* Digital Blue Theme */
 body {
-  background-color: #000000 !important;
-  color: #00ff00 !important;
-  font-family: 'Courier New', Courier, monospace !important;
+  background-color: #0b0c10;
+  color: #e6e6e6;
 }
 
-/* Headings */
+a {
+  color: #00ffff;
+}
+
 h1, h2, h3, h4, h5, h6 {
-  color: #00ff00 !important;
-  font-family: 'Courier New', Courier, monospace !important;
+  color: #1f8ef1;
 }
 
-/* Links */
-a, a:visited {
-  color: #00ff00 !important;
-  text-decoration: underline;
+.navbar {
+  background-color: #1a1a2e;
 }
 
-a:hover {
-  color: #00cc00 !important;
-  text-decoration: none;
+.navbar a {
+  color: #ffffff !important;
 }
 
-/* Navbar */
-.navbar, .navbar-default {
-  background-color: #111111 !important;
-  border-color: #222222 !important;
+pre, code {
+  background-color: #1f1f2e;
+  color: #00ffcc;
 }
 
-.navbar a, .navbar-brand, .navbar-nav > li > a {
-  color: #00ff00 !important;
-}
-
-/* Footer */
-footer {
-  background-color: #111111 !important;
-  color: #00ff00 !important;
-}
-
-footer a {
-  color: #00ff00 !important;
-}
-
-footer a:hover {
-  color: #00cc00 !important;
-}
-
-/* Code blocks */
-code, pre {
-  background-color: #111111 !important;
-  color: #00ff00 !important;
-  border: 1px solid #00ff00 !important;
-}
