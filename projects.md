@@ -5,12 +5,11 @@ permalink: /projects/
 ---
 ### Project List
 
-
-1. [Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes](###Creating-and-Defending-Against-Netcat-Backdoor-Login-Shells-&-Reverse-Shell-Backdoors-Using-Named-Pipes)
-
+1. [Creating and Defending Against Netcat Backdoor Shells](#netcat-named-pipes-exploit)
 
 
-### Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes Named Pipes Exploit
+<a id="netcat-named-pipes-exploit"></a>
+### Creating and Defending Against Netcat Backdoor Shells with Named Pipes
 
 **I. Overview**
 
