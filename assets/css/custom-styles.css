@@ -1,27 +1,26 @@
-/* Clean GRC Theme */
+/* Cyborg Theme */
 body {
-  background-color: #f8f9fa;
-  color: #212529;
+background-color: #060606;
+color: #adafae;
 }
 
 a {
-  color: #0056b3;
+color: #2a9fd6;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #003366;
+color: #fff;
 }
 
 .navbar {
-  background-color: #343a40;
+background-color: #222;
 }
 
 .navbar a {
-  color: #ffffff !important;
+color: #ccc !important;
 }
 
 pre, code {
-  background-color: #e0e0e0;
-  color: #111;
+background-color: #222;
+color: #adafae;
 }
-
