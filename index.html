@@ -3,3 +3,24 @@ layout: home
 title: Brad Redlien
 subtitle: Cybersecurity Student at SANS | Attorney | Specializing in Incident Response, SOC Analysis, and GRC
 ---
+
+<!-- Manual Post Preview Block -->
+<article class="post-preview">
+  <h2 class="post-title">
+    <a href="project.md">
+      Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes Named Pipes Exploit
+    </a>
+  </h2>
+  <p class="post-meta">Posted on July 17, 2025</p>
+  <p>
+    During the SANS SEC504 (Hacker Tools, Techniques, and Incident Handling) course, I learned how attackers use Netcat to create backdoor login shells, reverse shell backdoors, transfer files, and cause other mischief.
+  </p>
+  <p>
+    I created several VMs in Proxmox to learn how RITA detects C2 beaconing traffic, but I first wanted to practice using Netcat to create a backdoor login shell and a reverse shell backdoor. However, Ubuntu no longer supports the <code>-e</code> switch due to security restrictions. To work around this, I used the <code>mkfifo</code> command to create a named pipe — explained in detail below.
+  </p>
+  <p>
+    Finally, I share steps defenders can take to prevent, detect, and mitigate Netcat-based reverse shells using named pipes.
+  </p>
+  <a href="projects.md"><strong>Read More →</strong></a>
+</article>
+<hr>
