@@ -13,12 +13,12 @@
       <p class="copyright text-muted">
       {% if site.author %}
         {{ site.author }}
-        &nbsp;&bull;&nbsp;
+         • 
       {% endif %}
       {{ site.time | date: '%Y' }}
-
-      {% if site.url-pretty %}
-        &nbsp;&bull;&nbsp;
+      
+        {% if site.url-pretty %}
+         • 
         <span class="author-site">
           <a href="{% if site.url-canonical %}{{ site.url-canonical }}{% else %}{{ '/' | absolute_url }}{% endif %}">{{ site.url-pretty }}</a>
         </span>
@@ -26,17 +26,20 @@
 
       {% if site.matomo %}
         {% if site.matomo.opt-out %}
-          &nbsp;&bull;&nbsp;
+           • 
           <a href="http://{{- site.matomo.uri -}}/index.php?module=CoreAdminHome&action=optOut" target="_blank" class="text_muted">Do-not-Track</a>
         {% endif %}
       {% endif%}
 
       {% if site.edit_page_button and site.github.repository_url %}
-        &nbsp;&bull;&nbsp;
+         • 
         <a title="Edit this page on GitHub" href="{{ site.github.repository_url }}/edit/{{ site.github.source.branch }}/{{ page.path }}" class="text_muted">Edit page</a>
        {% endif%}
-
       </p>
+      <!-- Moved toggle button here for better separation; centers it or styles as needed -->
+      <div style="text-align: center; margin-top: 10px;">
+        <button onclick="toggleMode()" style="background: #2a9fd6; color: #fff; border: none; padding: 8px 16px; cursor: pointer;">Toggle Light/Dark Mode</button>
+      </div>
       {% unless site.remove-ads %}<p class="theme-by text-muted">
         Powered by
         <a href="https://beautifuljekyll.com">Beautiful Jekyll</a>
