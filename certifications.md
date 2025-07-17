@@ -6,6 +6,7 @@ permalink: /certifications/
 
 ## Certifications
 
+- GIAC (GIAC Certified Incident Handler)
 - GSEC (GIAC Security Essentials Certification)
 - CompTIA Security+
 - GISF (GIAC Information Security Fundamentals)
@@ -28,6 +29,8 @@ You can view and verify my badges directly on my [Credly Profile](https://www.cr
 
 <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
 
+<div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="19d48528-ac66-4988-ab16-836ce5dc8aae" data-share-badge-host="https://www.credly.com">
+  
 <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="4c24c1bc-5e01-4030-89df-50a01366dc49" data-share-badge-host="https://www.credly.com"></div>
 
 <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="4d180dae-c9b9-45d8-9fc7-873712b6ba06" data-share-badge-host="https://www.credly.com"></div>
