@@ -1,27 +1,42 @@
-/* Digital Blue Theme — Cyber Defense Look */
+/* Digital Blue - Cyber Defense Look */
 
 body {
-  background-color: #0b0c10;
-  color: #e6e6e6;
+  background-color: #0b0c10 !important;
+  color: #e6e6e6 !important;
 }
 
-a {
-  color: #00ffff;
+a, a:visited {
+  color: #00ffff !important;
+}
+
+a:hover {
+  color: #1f8ef1 !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #1f8ef1;
+  color: #1f8ef1 !important;
 }
 
-.navbar {
-  background-color: #1a1a2e;
+.navbar, .navbar-default {
+  background-color: #1a1a2e !important;
+  border-color: #1a1a2e !important;
 }
 
-.navbar a {
+.navbar a, .navbar-brand, .navbar-nav > li > a {
   color: #ffffff !important;
 }
 
-pre, code {
-  background-color: #1f1f2e;
-  color: #00ffcc;
+.post-preview {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+code, pre {
+  background-color: #1f1f2e !important;
+  color: #00ffcc !important;
+}
+
+footer {
+  background-color: #1a1a2e !important;
+  color: #ccc !important;
 }
