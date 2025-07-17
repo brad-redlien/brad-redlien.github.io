@@ -3,7 +3,7 @@ layout: page
 title: Projects
 permalink: /projects/
 ---
-[###Project List](###project-list)
+### Project List
 
 1. [Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes](###Creating-and-Defending-Against-Netcat-Backdoor-Login-Shells-&-Reverse-Shell-Backdoors-Using-Named-Pipes)
 
@@ -173,4 +173,4 @@ If defenders detect a Netcat shell:
 
 * **Investigate and Remediate:** Use tools like Volatility for memory analyses, determine the scope of the attack, patch entry points, rotate credentials, and determine if the attacker compromised other machines in the network.
 
-[Back to top](###project-list)
+[Back to top](###Creating-and-Defending-Against-Netcat-Backdoor-Login-Shells-&-Reverse-Shell-Backdoors-Using-Named-Pipes)
