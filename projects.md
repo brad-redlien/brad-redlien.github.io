@@ -5,7 +5,9 @@ permalink: /projects/
 ---
 ### Project List
 
+
 1. [Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes](###Creating-and-Defending-Against-Netcat-Backdoor-Login-Shells-&-Reverse-Shell-Backdoors-Using-Named-Pipes)
+
 
 
 ### Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes Named Pipes Exploit
@@ -172,5 +174,3 @@ If defenders detect a Netcat shell:
 * **Scan Ports:** Scan potentially impacted machines and close all unused ports.
 
 * **Investigate and Remediate:** Use tools like Volatility for memory analyses, determine the scope of the attack, patch entry points, rotate credentials, and determine if the attacker compromised other machines in the network.
-
-[Back to top](###Creating-and-Defending-Against-Netcat-Backdoor-Login-Shells-&-Reverse-Shell-Backdoors-Using-Named-Pipes)
