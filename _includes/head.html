@@ -119,6 +119,16 @@
   {%- endcapture -%}
   {%- assign img=img | strip -%}
 
+  <!-- Google Fonts for Font Tweaks (if not using CSS @import) -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Open+Sans&display=swap">
+
+<!-- JS for Accessibility/Mode Toggle -->
+<script>
+function toggleMode() {
+  document.body.classList.toggle('light-mode');
+}
+</script>
+
   <meta property="og:title" content="{{ title }}">
   <meta property="og:description" content="{{ description }}">
 
