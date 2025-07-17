@@ -1,5 +1,7 @@
-Creating and Defending Against Netcat Backdoor Login Shells &
-Reverse Shell Backdoors Using Named Pipes
+---
+layout: page
+title: Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes
+permalink: /projects/netcat_named_pipes/
 
 ### Overview:
 
