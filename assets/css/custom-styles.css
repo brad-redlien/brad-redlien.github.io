@@ -1,5 +1,3 @@
-/* Digital Blue - Cyber Defense Look */
-
 body {
   background-color: #0b0c10 !important;
   color: #e6e6e6 !important;
@@ -26,17 +24,12 @@ h1, h2, h3, h4, h5, h6 {
   color: #ffffff !important;
 }
 
-.post-preview {
-  background-color: transparent !important;
-  border: none !important;
+footer {
+  background-color: #1a1a2e !important;
+  color: #ccc !important;
 }
 
 code, pre {
   background-color: #1f1f2e !important;
   color: #00ffcc !important;
-}
-
-footer {
-  background-color: #1a1a2e !important;
-  color: #ccc !important;
 }
