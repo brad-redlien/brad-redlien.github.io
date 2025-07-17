@@ -1,19 +1,19 @@
-/* Digital Blue Theme */
+/* Clean GRC Theme */
 body {
-  background-color: #0b0c10;
-  color: #e6e6e6;
+  background-color: #f8f9fa;
+  color: #212529;
 }
 
 a {
-  color: #00ffff;
+  color: #0056b3;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #1f8ef1;
+  color: #003366;
 }
 
 .navbar {
-  background-color: #1a1a2e;
+  background-color: #343a40;
 }
 
 .navbar a {
@@ -21,7 +21,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 pre, code {
-  background-color: #1f1f2e;
-  color: #00ffcc;
+  background-color: #e0e0e0;
+  color: #111;
 }
 
