@@ -1,9 +1,7 @@
 ---
 layout: post
 title: "Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes Named Pipes Exploit"
-date: 2024-08-01
-categories: [Cybersecurity]
-tags: [Netcat, Named Pipes, Reverse Shell]
+date: 2025-07-17
 ---
 
 During the SANS SEC504 (Hacker Tools, Techniques, and Incident Handling) I learned how attackers use Netcat to create backdoor login shells, reverse shell backdoors, transfer files, and cause other mischief.
@@ -12,4 +10,4 @@ I created several VMs in Proxmox to learn more about how RITA () detects C2 beac
 
 Lastly, I discuss steps defenders can take to prevent, detect, and mitigate attackers’ use of Netcat with named pipes to create reverse shells.
 
-[Read the full write-up here](../projects/#netcat-named-pipes-exploit)
+[Read the full write-up here](../projects.md)
