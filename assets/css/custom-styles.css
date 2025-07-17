@@ -24,3 +24,71 @@ pre, code {
 background-color: #222;
 color: #adafae;
 }
+
+/* Improved Text Contrast */
+body {
+  color: #cccccc !important;
+}
+
+pre, code {
+  color: #cccccc !important;
+}
+
+/* Add Font Tweaks */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Open+Sans&display=swap');
+
+body {
+  font-family: 'Open Sans', sans-serif !important;
+}
+
+pre, code {
+  font-family: 'Roboto Mono', monospace !important;
+}
+
+/* Subtle Hover Effects */
+a:hover {
+  color: #66ccff !important;
+  transition: color 0.3s ease !important;
+}
+
+/* Navbar Enhancements */
+.navbar {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
+}
+
+.navbar a.active {
+  color: #2a9fd6 !important;
+}
+
+/* Accessibility/Mode Toggle - CSS Part */
+body.light-mode {
+  background-color: #f8f9fa !important;
+  color: #212529 !important;
+}
+
+body.light-mode a {
+  color: #0056b3 !important;
+}
+
+body.light-mode h1, body.light-mode h2, body.light-mode h3, body.light-mode h4, body.light-mode h5, body.light-mode h6 {
+  color: #003366 !important;
+}
+
+body.light-mode .navbar {
+  background-color: #343a40 !important;
+}
+
+body.light-mode .navbar a {
+  color: #ffffff !important;
+}
+
+body.light-mode pre, body.light-mode code {
+  background-color: #e0e0e0 !important;
+  color: #111 !important;
+}
+
+/* Project Section Borders */
+.post {
+  border-left: 3px solid #2a9fd6 !important;
+  padding-left: 10px !important;
+}
