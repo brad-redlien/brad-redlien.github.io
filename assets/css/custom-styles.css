@@ -1,94 +1,99 @@
-/* Cyborg Theme */
+/* Cyborg Theme - Base Styles */
 body {
-background-color: #060606;
-color: #adafae;
-}
-
-a {
-color: #2a9fd6;
+  background-color: #060606;
+  color: #cccccc; /* Improved contrast consolidated here */
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-color: #fff;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  color: #2a9fd6;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .navbar {
-background-color: #222;
+  background-color: #222;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .navbar a {
-color: #ccc !important;
-}
-
-pre, code {
-background-color: #222;
-color: #adafae;
-}
-
-/* Improved Text Contrast */
-body {
-  color: #cccccc !important;
-}
-
-pre, code {
-  color: #cccccc !important;
-}
-
-/* Add Font Tweaks */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Open+Sans&display=swap');
-
-body {
-  font-family: 'Open Sans', sans-serif !important;
-}
-
-pre, code {
-  font-family: 'Roboto Mono', monospace !important;
-}
-
-/* Subtle Hover Effects */
-a:hover {
-  color: #66ccff !important;
-  transition: color 0.3s ease !important;
-}
-
-/* Navbar Enhancements */
-.navbar {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
+  color: #ccc;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .navbar a.active {
-  color: #2a9fd6 !important;
+  color: #2a9fd6;
 }
 
-/* Accessibility/Mode Toggle - CSS Part */
-body.light-mode {
-  background-color: #f8f9fa !important;
-  color: #212529 !important;
+pre, code {
+  background-color: #222;
+  color: #cccccc; /* Improved contrast consolidated here */
+  font-family: 'Roboto Mono', monospace;
 }
 
-body.light-mode a {
-  color: #0056b3 !important;
+/* Font Imports and Unified Non-Code Fonts (Move import to top if keeping; prefer head.html link) */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Open+Sans&display=swap');
+
+p, li, ul, ol, div, span, small, .subtitle, .post-content,
+a:hover, a:visited, .navbar-brand, blockquote {
+  font-family: 'Open Sans', sans-serif;
 }
 
-body.light-mode h1, body.light-mode h2, body.light-mode h3, body.light-mode h4, body.light-mode h5, body.light-mode h6 {
-  color: #003366 !important;
-}
-
-body.light-mode .navbar {
-  background-color: #343a40 !important;
-}
-
-body.light-mode .navbar a {
-  color: #ffffff !important;
-}
-
-body.light-mode pre, body.light-mode code {
-  background-color: #e0e0e0 !important;
-  color: #111 !important;
+/* Interactions and Enhancements */
+a:hover {
+  color: #66ccff;
+  transition: color 0.3s ease;
 }
 
 /* Project Section Borders */
 .post {
-  border-left: 3px solid #2a9fd6 !important;
-  padding-left: 10px !important;
+  border-left: 3px solid #2a9fd6;
+  padding-left: 10px;
+}
+
+/* Accessibility/Mode Toggle - Light Mode Overrides */
+body.light-mode {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+body.light-mode a {
+  color: #0056b3;
+}
+
+body.light-mode h1, body.light-mode h2, body.light-mode h3,
+body.light-mode h4, body.light-mode h5, body.light-mode h6 {
+  color: #003366;
+}
+
+body.light-mode .navbar {
+  background-color: #343a40;
+}
+
+body.light-mode .navbar a {
+  color: #ffffff;
+}
+
+body.light-mode pre, body.light-mode code {
+  background-color: #e0e0e0;
+  color: #111;
+}
+
+/* Auto Dark Mode Based on System Preference (New Enhancement) */
+@media (prefers-color-scheme: light) {
+  body:not(.light-mode) {
+    background-color: #f8f9fa;
+    color: #212529;
+  }
+  /* Add other light mode rules here if needed, or toggle class via JS */
+}
+
+/* Optional: Font Smoothing for Better Readability on Dark BGs (New Enhancement) */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
