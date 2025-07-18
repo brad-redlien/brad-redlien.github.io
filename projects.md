@@ -15,7 +15,7 @@ permalink: /projects/
 
 During the SANS SEC504 (Hacker Tools, Techniques, and Incident Handling) I learned how attackers use Netcat to create backdoor login shells, reverse shell backdoors, transfer files, and cause other mischief.
 
-I created several VMs in Proxmox to learn more about how RITA () detects C2 beaconing traffic, but I first wanted to practice using Netcat to create a backdoor login shell and a reverse shell backdoor. However, I found that I couldn’t use the -e switch in Ubuntu to create a reverse shell because `-e` was removed for security reasons. To overcome this I created a named pipe using the `mkfifo` command, which I explain below.
+I created several VMs in Proxmox to learn more about how RITA (<https://www.activecountermeasures.com/free-tools/rita/>) detects C2 beaconing traffic, but I first wanted to practice using Netcat to create a backdoor login shell and a reverse shell backdoor. However, I found that I couldn’t use the -e switch in Ubuntu to create a reverse shell because `-e` was removed for security reasons. To overcome this I created a named pipe using the `mkfifo` command, which I explain below.
 
 Lastly, I discuss steps defenders can take to prevent, detect, and mitigate attackers’ use of Netcat with named pipes to create reverse shells.
 
@@ -162,7 +162,7 @@ Defenders can detect Netcat shells using named pipes through host and network mo
 
 * **Networking Monitoring:** IDS systems like Snort and Suricata can alert on outbound connections to unknown or suspect IPs on non-standard ports. Defenders can also use RITA and Zeek to analyze network flows for C2 beaconing patterns.
 
-* **EDR Tools:** EDR solutions can detect behavioral anomalies, like Netcat spawning shells or connecting through pipes. Defenders can hunt for suspicious named pipes (see, for example, a Windows-focused list of over 300 suspicious named pipes at ).
+* **EDR Tools:** EDR solutions can detect behavioral anomalies, like Netcat spawning shells or connecting through pipes. Defenders can hunt for suspicious named pipes (see, for example, a Windows-focused list of over 300 suspicious named pipes at <https://github.com/mthcht/awesome-lists/blob/main/Lists/suspicious_named_pipe_list.csv>).
 
 **C. Mitigation**
 
