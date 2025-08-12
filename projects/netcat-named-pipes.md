@@ -6,9 +6,9 @@ date: 2025-07-17
 description: Walkthrough of Netcat Backdoor and Reverse Shells Using Named Pipes (mkfifo) & Blue Team Detection and Mitigation.
 ---
 
-# Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes
+## Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes
 
-## I. Overview
+### I. Overview
 
 During the SANS SEC504 (Hacker Tools, Techniques, and Incident Handling) I learned how attackers use Netcat to create backdoor login shells, reverse shell backdoors, transfer files, and cause other mischief.
 
@@ -16,13 +16,13 @@ I created several VMs in Proxmox to learn more about how RITA () detects C2 beac
 
 Lastly, I discuss steps defenders can take to prevent, detect, and mitigate attackers’ use of Netcat with named pipes to create reverse shells.
 
-## II. Objective
+### II. Objective
 
 Use Netcat to create (1) a backdoor login shell and (2) a reverse shell backdoor using a Kali Linux VM and an Ubuntu Desktop VM in Proxmox.
 
-## III. Traditional Shell Listeners Using the `-e` Switch
+### III. Traditional Shell Listeners Using the `-e` Switch
 
-### A. Netcat Client & Listener Modes
+#### A. Netcat Client & Listener Modes
 
 Netcat operates in client or listener modes:
 
@@ -32,7 +32,7 @@ Netcat operates in client or listener modes:
 
 You must start the Netcat listener before executing the command on the Netcat client machine.
 
-### B. Creating a Shell Listener Using the `-e` Switch
+#### B. Creating a Shell Listener Using the `-e` Switch
 
 In a “traditional” Netcat installation you can use Netcat with the `-e` switch, which will execute a program like `/bin/bash` once connected. For example, the `-e` switch allows Computer 1 (the Netcat listener) to pass a shell to Computer 2 (the Netcat client). The attacker must be able to connect to the victim’s computer, which network firewalls often prevent.
 
@@ -52,7 +52,7 @@ When I attempted to run the first command on an Ubuntu VM it failed because the 
 
 ![Image 2](/assets/img/netcat_images/2.png)
 
-## IV. Named Pipe Workaround for Shell Listeners
+### IV. Named Pipe Workaround for Shell Listeners
 
 I learned to use named pipes to create Netcat relays, which allow you to relay, or link, attacks across multiple systems. This is useful if, for example, an attacker gains access to a corporate machine (for example, a web server) that also has access to other corporate machines in an internal network.
 
@@ -60,13 +60,13 @@ However, we can use a named pipe as a substitute for the -e switch to create a s
 
 ![Image 3](/assets/img/netcat_images/3.png)
 
-### Step 1.1 (Ubuntu Machine/Netcat Listener): First create the named pipe using the mkfifo command (I named it “attackpipe”):
+#### Step 1.1 (Ubuntu Machine/Netcat Listener): First create the named pipe using the mkfifo command (I named it “attackpipe”):
 
     mkfifo attackpipe
 
 ![Image 4](/assets/img/netcat_images/4.png)
 
-### Step 1.2 (Ubuntu Machine/Netcat Listener): Create the Netcat listener on the victim machine at port 4444. The named pipe (a) passes a shell to the named pipe and (b) passes that shell to the attacker’s machine when it connects to the victim’s machine:
+#### Step 1.2 (Ubuntu Machine/Netcat Listener): Create the Netcat listener on the victim machine at port 4444. The named pipe (a) passes a shell to the named pipe and (b) passes that shell to the attacker’s machine when it connects to the victim’s machine:
 
     nc -l -p 4444 < attackpipe | /bin/sh > attackpipe
 
@@ -74,7 +74,7 @@ While not shown in the below screenshot, the cursor blinks below the command ind
 
 ![Image 5](/assets/img/netcat_images/5.png)
 
-### Step 2 (Kali Linux/Netcat Client): Run the below command on the Kali machine to connect to the Ubuntu machine. In my Proxmox lab environment, the Ubuntu machine’s IP address is 192.168.55.73.
+#### Step 2 (Kali Linux/Netcat Client): Run the below command on the Kali machine to connect to the Ubuntu machine. In my Proxmox lab environment, the Ubuntu machine’s IP address is 192.168.55.73.
 
     nc 192.168.55.73 4444
 
@@ -82,7 +82,7 @@ While not shown in the below screenshot, the cursor blinks below the command ind
 
 The above screenshot shows the Kali machine connecting and obtaining a shell from the Ubuntu machine. After running the Netcat command the Kali machine’s cursor blinks and you can enter commands that run on the Ubuntu machine (such as, `whoami`, `hostname`, and `ls -l`).
 
-## V. Named Pipe Workaround for Reverse Shells
+### V. Named Pipe Workaround for Reverse Shells
 
 As mentioned above, network firewalls typically prevent an attacker from using Netcat to connect to the victim’s machine. In these instances we can use a reverse shell backdoor because network firewalls typically allow outbound connections. In other words, the network firewall would not prevent the victim machine from making an outbound connection (the Netcat client) to the attacker’s machine (the Netcat listener).
 
@@ -90,27 +90,27 @@ As we did above, we can also use a named pipe to compensate for the absence of t
 
 ![Image 7](/assets/img/netcat_images/7.png)
 
-### Step 1 (Kali Linux/Netcat Listener): This time the Kali machine is the Netcat listener on port 4444. Start the Netcat listener before executing the Netcat command on the Ubuntu machine. In my Proxmox lab environment the Kali machine’s IP is 192.168.55.60.
+#### Step 1 (Kali Linux/Netcat Listener): This time the Kali machine is the Netcat listener on port 4444. Start the Netcat listener before executing the Netcat command on the Ubuntu machine. In my Proxmox lab environment the Kali machine’s IP is 192.168.55.60.
 
 ![Image 8](/assets/img/netcat_images/8.png)
 
-### Step 2.1 (Ubuntu/Netcat Client): Create a named pipe like before (the “attackpipe”).
+#### Step 2.1 (Ubuntu/Netcat Client): Create a named pipe like before (the “attackpipe”).
 
 ![Image 8](/assets/img/netcat_images/9.png)
 
-### Step 2.2 (Ubuntu/Netcat Client): Use Netcat to connect to the Kali machine at port 4444, passing a shell to the Kali machine via the named pipe (“attackpipe”).
+#### Step 2.2 (Ubuntu/Netcat Client): Use Netcat to connect to the Kali machine at port 4444, passing a shell to the Kali machine via the named pipe (“attackpipe”).
 
 ![Image 9](/assets/img/netcat_images/9.png)
 
-### Step 3 (Kali/Netcat Listener): Once the Ubuntu machine connects to the Kali machine, the Kali machine can execute commands that run on the Ubuntu machine. The below screenshot shows the Ubuntu machine’s responses to the Kali commands (for example, the Ubuntu machine’s hostname is “rita-sensor” and the whoami, hostname, pwd, and ls -l commands reflect the Ubuntu machine’s response).
+#### Step 3 (Kali/Netcat Listener): Once the Ubuntu machine connects to the Kali machine, the Kali machine can execute commands that run on the Ubuntu machine. The below screenshot shows the Ubuntu machine’s responses to the Kali commands (for example, the Ubuntu machine’s hostname is “rita-sensor” and the whoami, hostname, pwd, and ls -l commands reflect the Ubuntu machine’s response).
 
 ![Image 10](/assets/img/netcat_images/10.png)
 
-## VI. Blue Team: Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors
+### VI. Blue Team: Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors
 
 There are multiple ways for defenders to prevent, detect, and mitigate attackers’ use of Netcat with named pipes to create reverse shells. I’ve focused on Linux defenses since I used that environment in the above examples, but defenders can adapt many of these techniques for use in Windows environments.
 
-### A. Prevention
+#### A. Prevention
 
 Defenders should harden systems to reduce the attack surface and prevent the attack outright by, for example:
 
@@ -124,7 +124,7 @@ Defenders should harden systems to reduce the attack surface and prevent the att
 
 * **Segment the Network:** Use VLANs to help isolate traffic between machines. This helps limit an attacker’s ability to pivot to other systems throughout the network.
 
-### B. Detection
+#### B. Detection
 
 Defenders can detect Netcat shells using named pipes through host and network monitoring in multiple ways, including:
 
@@ -134,7 +134,7 @@ Defenders can detect Netcat shells using named pipes through host and network mo
 
 * **EDR Tools:** EDR solutions can detect behavioral anomalies, like Netcat spawning shells or connecting through pipes. Defenders can hunt for suspicious named pipes (see, for example, a Windows-focused list of over 300 suspicious named pipes at ).
 
-### C. Mitigation
+#### C. Mitigation
 
 If defenders detect a Netcat shell:
 
