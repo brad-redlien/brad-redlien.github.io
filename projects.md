@@ -8,7 +8,7 @@ permalink: /projects/
 <!-- Manual Post Preview Block -->
 <article class="post-preview">
   <h2 class="post-title">
-    <a href="/projects/#netcat-named-pipes">
+    <a href="{{ '/projects/netcat-named-pipes/' | relative_url }}">
       Creating and Defending Against Netcat Backdoor Shells with Named Pipes
     </a>
   </h2>
@@ -22,6 +22,6 @@ permalink: /projects/
   <p>
     Finally, I share steps defenders can take to prevent, detect, and mitigate Netcat-based reverse shells using named pipes.
   </p>
-  <a href="/projects/#netcat-named-pipes"><strong>Read More →</strong></a>
+  <p><a href="{{ '/projects/netcat-named-pipes/' | relative_url }}"><strong>Read More →</strong></a></p>
 </article>
 <hr>
