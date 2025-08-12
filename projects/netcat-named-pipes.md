@@ -1,13 +1,10 @@
 ---
 layout: page
-title: Creating and Defending Against Netcat Backdoor Shells (Named Pipes)
+title: Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes
 permalink: /projects/netcat-named-pipes/
 date: 2025-07-17
 description: Walkthrough of Netcat Backdoor and Reverse Shells Using Named Pipes (mkfifo) & Blue Team Detection and Mitigation.
 ---
-
-## Creating and Defending Against Netcat Backdoor Login Shells & Reverse Shell Backdoors Using Named Pipes
-
 ### I. Overview
 
 During the SANS SEC504 (Hacker Tools, Techniques, and Incident Handling) I learned how attackers use Netcat to create backdoor login shells, reverse shell backdoors, transfer files, and cause other mischief.
