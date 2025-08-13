@@ -6,6 +6,14 @@ date: 2025-08-11
 description: Walkthrough of a Blue Team Investigation following a Metasploit PsExec Attack.
 ---
 
+<!-- Floating TOC (renders on the right on large screens, inline on mobile) -->
+<div class="toc-wrap">
+  <h3>Contents</h3>
+
+* TOC
+{:toc .toc-list}
+</div>
+
 ## I. Project Summary  
 
 This project simulates a Metasploit PsExec attack in a controlled Proxmox lab, followed by an incident response investigation using PowerShell and Sysmon.
