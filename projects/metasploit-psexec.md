@@ -4,7 +4,6 @@ title: Blue Team Investigation of a Simulated Metasploit Attack
 permalink: /projects/metasploit-psexec/
 date: 2025-08-11
 description: Walkthrough of a Blue Team Investigation following a Metasploit PsExec Attack.
-toc: true
 ---
 
 ## I. Project Summary  
