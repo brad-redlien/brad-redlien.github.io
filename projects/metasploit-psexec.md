@@ -12,21 +12,21 @@ This project simulates a Metasploit PsExec attack in a controlled Proxmox lab, f
 
 I used two virtual machines in my Proxmox lab environment:
 
-1. Windows 10 workstation (victim): I disabled Windows defender to allow realistic payload execution.
+1. Windows 10 workstation (victim): I disabled Windows Defender to allow realistic payload execution.
 
 2. A Kali Linux system (attacker): I used Kali to launch the exploitation and post-exploitation actions.
 
-From the Kali machine, I used Metasploit’s PsExec module to gain NT AUTHORITY/SYSTEM access on the Windows 10 machine, then performed several post-exploitation actions:
+From the Kali machine, I used Metasploit’s PsExec module to gain `NT AUTHORITY/SYSTEM` access on the Windows 10 machine, then performed several post-exploitation actions:
 
--   Credential dumping using hashdump.
+-   Credential dumping using `hashdump`.
     
--   System reconnaissance (sysinfo, ps, getpid).
+-   System reconnaissance (`sysinfo`, `ps`, `getpid`).
     
--   File transfer (uploading nc.exe) and exfiltration.
+-   File transfer (uploading `nc.exe`) and exfiltration.
     
 -   Creating a Netcat backdoor for secondary C2 access.
 
-On the defender side, I investigated the incident using PowerShell and host-based forensics with Sysmon, configured with SwiftOnSecurity’s config. I Identified:
+On the defender side, I investigated the incident using PowerShell and host-based forensics with Sysmon, configured with SwiftOnSecurity’s config. I identified:
 
 -   Malicious service creation.
     
@@ -38,7 +38,7 @@ I concluded the project by terminating the Meterpreter and Netcat processes and 
 
 ### Key Skills Demonstrated
 
--   **Incident Response & Live Analysis** – Used PowerShell to identify malicious processes, active network connections, and persistence in real-time.
+-   **Incident Response & Live Analysis** – Used PowerShell to identify malicious processes, active network connections, and persistence in real time.
     
 -   **Host-Based Forensics** – Leveraged Sysmon to detect PsExec service creation, command execution, Netcat backdoor, and malicious outbound connections.
     
@@ -58,11 +58,11 @@ I concluded the project by terminating the Meterpreter and Netcat processes and 
     
 -   Kali Linux VM (IP 192.168.55.60).
 
-Both VMs were on the same subnet. I verified connectivity from Windows using Test-NetConnection 192.168.55.60 in PowerShell to confirm that the Windows machine could communicate with the Kali Linux machine.
+Both VMs were on the same subnet. I verified connectivity from Windows using `Test-NetConnection 192.168.55.60` in PowerShell to confirm that the Windows machine could communicate with the Kali Linux machine.
 
 ![Image 1](/assets/img/metasploit-psexec/1.png)
 
-From the Kali Linux machine, I ran ping -c 5 192.168.55.2 to confirm that the Kali Linux machine can communicate with the Windows machine.
+From the Kali Linux machine, I ran `ping -c 5 192.168.55.2` to confirm that the Kali Linux machine can communicate with the Windows machine.
 
 ![Image 2](/assets/img/metasploit-psexec/2.png)
   
@@ -72,13 +72,13 @@ The goal of this project was to practice performing an incident investigation in
 
 I disabled Microsoft Defender via Group Policy by:
 
--   Opening gpedit.msc and navigating to Computer Configuration → Administrative Templates → Windows Components → Microsoft Defender Antivirus
+-   Opening `gpedit.msc` and navigating to Computer Configuration → Administrative Templates → Windows Components → Microsoft Defender Antivirus
     
 -   Double-click “Turn off Microsoft Defender Antivirus” → set to Enabled → click Apply.
 
 ![Image 3](/assets/img/metasploit-psexec/3.png)    
 
-While still in gpedit.msc, I navigated to Microsoft Defender Antivirus → Real-time Protection → Turn off real-time protection → set to Enabled.
+While still in `gpedit.msc`, I navigated to Microsoft Defender Antivirus → Real-time Protection → Turn off real-time protection → set to Enabled.
 
 ![Image 4](/assets/img/metasploit-psexec/4.png)  
 
@@ -265,7 +265,7 @@ In sum, `Get-CimInstance` established:
 
 #### 1. Initial Access Stage: Identifying the Initial Metasploit/PsExec Service Creation in Sysmon’s System Logs
 
-I first checked the System logs in Event Viewer (Event Viewer → Windows Logs → System). I filtered the System log for Event ID 7045 (Service Control Manager Event: “A service was installed in the system”). Event ID 7045 means that a new service was installed, and the Metasploit PsExec module installs a temporary service.
+I first checked the System logs in Event Viewer (Event Viewer → Windows Logs → System). I filtered the System log for `Event ID 7045` (Service Control Manager Event: “A service was installed in the system”). `Event ID 7045` means that a new service was installed, and the Metasploit PsExec module installs a temporary service.
 
    ![Image 25](/assets/img/metasploit-psexec/35.png)
 
@@ -273,7 +273,7 @@ I first checked the System logs in Event Viewer (Event Viewer → Windows Logs �
   
 The above screenshots from Event Viewer concern the Meterpreter/PsExec attack and show:
 
--   Event ID 7045 (a service was installed in the system): this was Metasploit’s initial access to the Windows 10 machine.
+-   `Event ID 7045` (a service was installed in the system): this was Metasploit’s initial access to the Windows 10 machine.
     
 -   The service name is a random string, which is a common Metasploit technique to avoid detection. A random string for a service name is a strong sign of an attack. Legitimate Windows services typically use descriptive names like “Windows Update.”
     
@@ -297,19 +297,19 @@ The above screenshots from Event Viewer concern the Meterpreter/PsExec attack an
     
 #### 2. Execution Stage: Identifying Metasploit/PsExec Execution in Sysmon’s Operational Log
 
-After identifying Metasploit’s initial access via a malicious service installation (Event ID 7045), I used Sysmon to identify the execution sequence in the Operational logs. I accessed Sysmon’s Operational log:
+After identifying Metasploit’s initial access via a malicious service installation (`Event ID 7045`), I used Sysmon to identify the execution sequence in the Operational logs. I accessed Sysmon’s Operational log:
 
 Event Viewer → Applications and Services Logs → Microsoft → Windows → Sysmon → Operational.
 
-I then filtered for Event ID 1 (Process Creation), which is useful in incident response investigations because it records when a process was created, the full command line arguments, the user context, and parent process details.
+I then filtered for `Sysmon Event ID 1` (Process Creation), which is useful in incident response investigations because it records when a process was created, the full command line arguments, the user context, and parent process details.
 
   ![Image 27](/assets/img/metasploit-psexec/36.png)
 
   ![Image 28](/assets/img/metasploit-psexec/36.1.png)
 
-Sysmon Event ID 1 entries show:
+`Sysmon Event ID 1` entries show:
 
--   First Event: Execution of `cmd.exe` under the SYSTEM account (`C:\Windows\System32\cmd.exe`). The CommandLine field shows that it was launched by the malicious service and matches the service payload identified in Event ID 7045.
+-   First Event: Execution of `cmd.exe` under the SYSTEM account (`C:\Windows\System32\cmd.exe`). The CommandLine field shows that it was launched by the malicious service and matches the service payload identified in `Event ID 7045`.
     
 -   Second Event: cmd.exe then executed `powershell.exe` with `-nop -w hidden -noni -c` flags, followed by an obfuscated script. This PowerShell payload is consistent with Meterpreter stagers that are designed to connect back to an attacker.
     
@@ -323,20 +323,20 @@ The malicious service did not execute PowerShell directly. Instead, it first sta
     
 #### 3. C2 Connection: Sysmon’s Network Connection Log
 
-After confirming in (2) Execution Stage that the malicious PsExec service launched `cmd.exe` as a wrapper to execute an obfuscated PowerShell stager, I next checked Sysmon Event ID 3 to determine if the payload initiated a C2 connection. As detailed below, the Sysmon Event ID 3 entry proved that the obfuscated PowerShell stager established a C2 session from the Windows 10 machine to the attacker.
+After confirming in (2) Execution Stage that the malicious PsExec service launched `cmd.exe` as a wrapper to execute an obfuscated PowerShell stager, I next checked `Sysmon Event ID 3` to determine if the payload initiated a C2 connection. As detailed below, the `Sysmon Event ID 3` entry proved that the obfuscated PowerShell stager established a C2 session from the Windows 10 machine to the attacker.
 
-Event ID 3 in Sysmon records detailed network connection telemetry, including the process image, Process GUID, source/destination IP addresses, ports, and protocol.
+`Sysmon Event ID 3` records detailed network connection telemetry, including the process image, Process GUID, source/destination IP addresses, ports, and protocol.
 
   ![Image 29](/assets/img/metasploit-psexec/37.png)
   ![Image 30](/assets/img/metasploit-psexec/37.1.png)
   
-The above screenshots show Sysmon Event ID 3 records documenting the outbound C2 connection from the Windows 10 machine to the attacker:
+The above screenshots show `Sysmon Event ID 3` records documenting the outbound C2 connection from the Windows 10 machine to the attacker:
 
 -   `C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe` initiated the C2 connection.
     
--   The ProcessGuid matches the PowerShell process created by `cmd.exe` in the Execution Stage (Event ID 1).
+-   The ProcessGuid matches the PowerShell process created by `cmd.exe` in the Execution Stage (`Sysmon Event ID 1`).
     
--   The User entry shows that it ran under NT AUTHORITY/SYSTEM, which means that the attacker had full admin level control over the Windows 10 machine.
+-   The User entry shows that it ran under `NT AUTHORITY/SYSTEM`, which means that the attacker had full admin level control over the Windows 10 machine.
     
 -   Connection details:
     
@@ -368,9 +368,9 @@ I first investigated the Netcat backdoor activity using Sysmon’s Operational l
 
 Event Viewer → Applications and Services Log → Microsoft → Windows → Sysmon → Operational
 
-I filtered for Event ID 1 (Process Creation), which is useful in incident response investigations because it records when a process was created, the full command line arguments, the user context, and parent process details.
+I filtered for `Sysmon Event ID 1` (Process Creation), which is useful in incident response investigations because it records when a process was created, the full command line arguments, the user context, and parent process details.
 
-I then searched for nc.exe to locate the relevant entries:
+I then searched for `nc.exe` to locate the relevant entries:
 
   ![Image 31](/assets/img/metasploit-psexec/34.png)
 
@@ -382,7 +382,7 @@ The screenshots show the following key information:
     
 -   Both `nc.exe` and its child process, `cmd.exe`, ran as NT AUTHORITY/ SYSTEM, granting the attacker admin control of the system.
     
--   The parent process, nc.exe, was executed from `C:\Windows\Temp`. This is a high risk location because the Temp directory is often used by attackers for staging tools.
+-   The parent process, `nc.exe`, was executed from `C:\Windows\Temp`. This is a high risk location because the Temp directory is often used by attackers for staging tools.
     
 -   The parent command line (`nc.exe -Ldp 5555 -e cmd.exe`) reflects that Netcat was configured to be a backdoor listener:
     
@@ -404,13 +404,13 @@ The Sysmon log provides MD5 and SHA256 hashes for cmd.exe, which an investigator
     
 ### (B) Sysmon Network Connection Log
 
-I next investigated Sysmon’s Network Connection logs (Event ID 3) to verify whether the Netcat listener accepted an incoming connection from the attacker.
+I next investigated Sysmon’s Network Connection logs (`Sysmon Event ID 3`) to verify whether the Netcat listener accepted an incoming connection from the attacker.
 
   ![Image 33](/assets/img/metasploit-psexec/38.png)
 
   ![Image 34](/assets/img/metasploit-psexec/38.1.png)
   
-The Sysmon Event ID 3 entries confirm that the Netcat backdoor running on the Windows 10 machine received a remote connection from the attacker:
+The `Sysmon Event ID 3` entries confirm that the Netcat backdoor running on the Windows 10 machine received a remote connection from the attacker:
 
 -   Netcat launched from the Temp directory (`C:\Windows\Temp\nc.exe`). This is suspicious because the Temp directory is not a standard location for legitimate executables and attackers often use the Temp directory for staging tools.
     
@@ -420,9 +420,9 @@ The Sysmon Event ID 3 entries confirm that the Netcat backdoor running on the Wi
     
 	-   Source IP and Port: `192.168.55.60:48124` (attacker’s machine)
     
-	-   Destination IP and Port: `192.168.55.2:5555` (Windows 10 machine) - this matches the previously identified malicious command line (`nc.exe -Ldp 5555 -e cmd.exe`) from Sysmon’s Event ID 1.
+	-   Destination IP and Port: `192.168.55.2:5555` (Windows 10 machine) - this matches the previously identified malicious command line (`nc.exe -Ldp 5555 -e cmd.exe`) from `Sysmon Event ID 1`.
     
--   The connection was made under NT AUTHORITY/SYSTEM, providing the attacker with admin control.
+-   The connection was made under `NT AUTHORITY/SYSTEM`, providing the attacker with admin control.
     
 This confirms that the attacker connected to the Netcat listener and established a secondary C2 channel. This secondary access method provided a backup to the primary Meterpreter session and the attacker could use it for persistence or lateral movement.
 
