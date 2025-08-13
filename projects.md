@@ -5,6 +5,52 @@ permalink: /projects/
 ---
 ### Project List
 
+---
+layout: page
+title: Blue Team Investigation of a Simulated Metasploit Attack
+permalink: /projects/metasploit-psexec/
+date: 2025-08-11
+description: Walkthrough of a Blue Team Investigation following a Metasploit PsExec Attack.
+
+<!-- Manual Post Preview Block -->
+<article class="post-preview">
+  <h2 class="post-title">
+    <a href="{{ '/projects/metasploit-psexec/' | relative_url }}">
+      Blue Team Investigation of a Simulated Metasploit Attack 
+    </a>
+  </h2>
+  <p class="post-meta">Posted on August 11, 2025</p>
+  <p>This project simulates a Metasploit PsExec attack in a controlled Proxmox lab, followed by an incident response investigation using PowerShell and Sysmon.</p>
+
+  <p>I used two virtual machines in my Proxmox lab environment:</p>
+
+  <ol>
+    <li><strong>Windows 10 workstation (victim):</strong> I disabled Windows Defender to allow realistic payload execution.</li>
+    <li><strong>Kali Linux system (attacker):</strong> I used Kali to launch the exploitation and post-exploitation actions.</li>
+</ol>
+
+  <p>From the Kali machine, I used Metasploit’s PsExec module to gain <code>NT AUTHORITY\SYSTEM</code> access on the Windows 10 machine, then performed several post-exploitation actions:</p>
+
+  <ul>
+    <li>Credential dumping using <code>hashdump</code>.</li>
+    <li>System reconnaissance (<code>sysinfo</code>, <code>ps</code>, <code>getpid</code>).</li>
+    <li>File transfer (uploading <code>nc.exe</code>) and exfiltration.</li>
+    <li>Creating a Netcat backdoor for secondary C2 access.</li>
+  </ul>
+
+  <p>On the defender side, I investigated the incident using PowerShell and host-based forensics with Sysmon, configured with SwiftOnSecurity’s config. I identified:</p>
+
+  <ul>
+    <li>Malicious service creation.</li>
+    <li>Process execution chains.</li>
+    <li>Two outbound C2 connections to the attacker machine.</li>
+  </ul>
+
+  <p>I concluded the project by terminating the Meterpreter and Netcat processes and removing the backdoor binary (<code>nc.exe</code>).</p>
+  <p><a href="{{ '/projects/metasploit-psexec/' | relative_url }}"><strong>Read More →</strong></a></p>
+</article>
+<hr>
+
 <!-- Manual Post Preview Block -->
 <article class="post-preview">
   <h2 class="post-title">
