@@ -1,7 +1,7 @@
 ---
 layout: page
-title: CTF Writeups
-permalink: /ctf-writeups/
+title: CTFs
+permalink: /ctfs/
 ---
 
 # CTF Writeups
