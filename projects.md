@@ -3,55 +3,27 @@ layout: page
 title: Projects
 permalink: /projects/
 ---
+
 ### Project List
 
----
-layout: page
-title: Blue Team Investigation of a Simulated Metasploit Attack
-permalink: /projects/metasploit-psexec/
-date: 2025-08-11
-description: Walkthrough of a Blue Team Investigation following a Metasploit PsExec Attack.
-
-<!-- Manual Post Preview Block -->
+<!-- Project preview: Metasploit PsExec -->
 <article class="post-preview">
   <h2 class="post-title">
     <a href="{{ '/projects/metasploit-psexec/' | relative_url }}">
-      Blue Team Investigation of a Simulated Metasploit Attack 
+      Blue Team Investigation of a Simulated Metasploit PsExec Attack
     </a>
   </h2>
   <p class="post-meta">Posted on August 11, 2025</p>
-  <p>This project simulates a Metasploit PsExec attack in a controlled Proxmox lab, followed by an incident response investigation using PowerShell and Sysmon.</p>
-
-  <p>I used two virtual machines in my Proxmox lab environment:</p>
-
-  <ol>
-    <li><strong>Windows 10 workstation (victim):</strong> I disabled Windows Defender to allow realistic payload execution.</li>
-    <li><strong>Kali Linux system (attacker):</strong> I used Kali to launch the exploitation and post-exploitation actions.</li>
-</ol>
-
-  <p>From the Kali machine, I used Metasploit’s PsExec module to gain <code>NT AUTHORITY\SYSTEM</code> access on the Windows 10 machine, then performed several post-exploitation actions:</p>
-
-  <ul>
-    <li>Credential dumping using <code>hashdump</code>.</li>
-    <li>System reconnaissance (<code>sysinfo</code>, <code>ps</code>, <code>getpid</code>).</li>
-    <li>File transfer (uploading <code>nc.exe</code>) and exfiltration.</li>
-    <li>Creating a Netcat backdoor for secondary C2 access.</li>
-  </ul>
-
-  <p>On the defender side, I investigated the incident using PowerShell and host-based forensics with Sysmon, configured with SwiftOnSecurity’s config. I identified:</p>
-
-  <ul>
-    <li>Malicious service creation.</li>
-    <li>Process execution chains.</li>
-    <li>Two outbound C2 connections to the attacker machine.</li>
-  </ul>
-
-  <p>I concluded the project by terminating the Meterpreter and Netcat processes and removing the backdoor binary (<code>nc.exe</code>).</p>
+  <p>
+    Simulated a Metasploit PsExec-based intrusion on a Windows 10 machine and performed end-to-end blue team investigation using
+    PowerShell and Sysmon to detect service execution, process chains, and C2 connections (including a Netcat backdoor).
+  </p>
   <p><a href="{{ '/projects/metasploit-psexec/' | relative_url }}"><strong>Read More →</strong></a></p>
 </article>
+
 <hr>
 
-<!-- Manual Post Preview Block -->
+<!-- Project preview: Netcat named pipes -->
 <article class="post-preview">
   <h2 class="post-title">
     <a href="{{ '/projects/netcat-named-pipes/' | relative_url }}">
@@ -60,14 +32,8 @@ description: Walkthrough of a Blue Team Investigation following a Metasploit PsE
   </h2>
   <p class="post-meta">Posted on July 17, 2025</p>
   <p>
-    During the SANS SEC504 (Hacker Tools, Techniques, and Incident Handling) course, I learned how attackers use Netcat to create backdoor login shells, reverse shell backdoors, transfer files, and cause other mischief.
-  </p>
-  <p>
-    I created several VMs in Proxmox to learn how RITA detects C2 beaconing traffic, but I first wanted to practice using Netcat to create a backdoor login shell and a reverse shell backdoor. However, Ubuntu no longer supports the <code>-e</code> switch due to security restrictions. To work around this, I used the <code>mkfifo</code> command to create a named pipe — explained in detail below.
-  </p>
-  <p>
-    Finally, I share steps defenders can take to prevent, detect, and mitigate Netcat-based reverse shells using named pipes.
+    Built a lab to practice Netcat backdoor techniques and defender countermeasures. Covers creating login and reverse
+    shells using named pipes (<code>mkfifo</code>) on Linux and documents detection and mitigation steps for blue teams.
   </p>
   <p><a href="{{ '/projects/netcat-named-pipes/' | relative_url }}"><strong>Read More →</strong></a></p>
 </article>
-<hr>
