@@ -137,6 +137,16 @@ body.light-mode .toc-list a {
   color: inherit;
 }
 
+/* Light Mode Active TOC Highlight */
+body.light-mode .toc-list a.active-toc {
+  color: #0056b3;
+  font-weight: bold;
+  border-bottom-color: #0056b3;
+  background-color: rgba(0, 86, 179, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
 /* ------------------------------------------------------
    Auto Dark Mode Based on System Preference
 ------------------------------------------------------ */
@@ -183,15 +193,21 @@ body.light-mode .toc-list a {
   text-decoration: none;
   color: #ccc;
   border-bottom: 1px dotted transparent;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .toc-list a:hover {
   border-bottom-color: #66ccff;
 }
 
+/* Dark Mode Active TOC Highlight */
 .toc-list a.active-toc {
-  font-weight: 600;
-  border-bottom-color: #999;
+  color: #2a9fd6;
+  font-weight: bold;
+  border-bottom-color: #2a9fd6;
+  background-color: rgba(42, 159, 214, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 
 /* Ensure headings don't hide under a fixed navbar when linked */
@@ -217,5 +233,32 @@ h2, h3, h4 {
     padding: 0;
     border: 0;
     background: transparent;
+  }
+}
+
+/* Make the floating TOC sticky on desktop */
+.toc-wrap {
+  position: sticky;     /* stick to viewport when scrolling */
+  top: 90px;            /* adjust for your navbar height */
+  max-height: calc(100vh - 110px); /* keep within the viewport */
+  overflow: auto;       /* scroll inside if TOC is tall */
+  z-index: 2;           /* sit above content if overlapping */
+}
+
+/* If the parent has overflow/transform that breaks sticky, fall back to fixed */
+@supports not (position: sticky) {
+  .toc-wrap {
+    position: fixed;
+    right: 20px;
+    top: 90px;
+  }
+}
+
+/* Mobile/tablet: revert to inline (not sticky) */
+@media (max-width: 992px) {
+  .toc-wrap {
+    position: static;
+    max-height: none;
+    overflow: visible;
   }
 }
