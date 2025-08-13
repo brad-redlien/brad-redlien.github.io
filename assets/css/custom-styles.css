@@ -1,8 +1,17 @@
-/* Cyborg Theme - Base Styles */
+/* ------------------------------------------------------
+   Font Imports - Keep at the very top
+------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Open+Sans&display=swap');
+
+/* ------------------------------------------------------
+   Cyborg Theme - Base Styles
+------------------------------------------------------ */
 body {
   background-color: #060606;
-  color: #cccccc; /* Improved contrast consolidated here */
+  color: #cccccc; /* Improved contrast */
   font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -15,6 +24,23 @@ a {
   font-family: 'Open Sans', sans-serif;
 }
 
+a:visited {
+  color: #8ac7ea; /* Maintain contrast for visited links */
+}
+
+a:hover {
+  color: #66ccff;
+  transition: color 0.3s ease;
+}
+
+a:focus-visible {
+  outline: 2px dashed #2a9fd6;
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------
+   Navbar
+------------------------------------------------------ */
 .navbar {
   background-color: #222;
   box-shadow: 0 2px 4px rgba(0,0,0,0.5);
@@ -25,37 +51,49 @@ a {
   font-family: 'Open Sans', sans-serif;
 }
 
+.navbar a:hover {
+  color: #66ccff;
+}
+
 .navbar a.active {
   color: #2a9fd6;
 }
 
+/* ------------------------------------------------------
+   Code Blocks
+------------------------------------------------------ */
 pre, code {
-  background-color: #222;
-  color: #cccccc; /* Improved contrast consolidated here */
+  background-color: #1a1a1a; /* Darker bg for contrast */
+  color: #e6e6e6;
   font-family: 'Roboto Mono', monospace;
 }
 
-/* Font Imports and Unified Non-Code Fonts (Move import to top if keeping; prefer head.html link) */
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Open+Sans&display=swap');
+pre {
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  line-height: 1.45;
+}
 
+/* ------------------------------------------------------
+   Unified Non-Code Fonts
+------------------------------------------------------ */
 p, li, ul, ol, div, span, small, .subtitle, .post-content,
 a:hover, a:visited, .navbar-brand, blockquote {
   font-family: 'Open Sans', sans-serif;
 }
 
-/* Interactions and Enhancements */
-a:hover {
-  color: #66ccff;
-  transition: color 0.3s ease;
-}
-
-/* Project Section Borders */
+/* ------------------------------------------------------
+   Project Section Borders
+------------------------------------------------------ */
 .post {
   border-left: 3px solid #2a9fd6;
   padding-left: 10px;
 }
 
-/* Accessibility/Mode Toggle - Light Mode Overrides */
+/* ------------------------------------------------------
+   Accessibility/Mode Toggle - Light Mode Overrides
+------------------------------------------------------ */
 body.light-mode {
   background-color: #f8f9fa;
   color: #212529;
@@ -83,17 +121,101 @@ body.light-mode pre, body.light-mode code {
   color: #111;
 }
 
-/* Auto Dark Mode Based on System Preference (New Enhancement) */
+/* ------------------------------------------------------
+   Light Mode TOC Override
+------------------------------------------------------ */
+body.light-mode .toc-wrap {
+  border-left-color: #e6e6e6;
+  background: #fafafa;
+}
+
+body.light-mode .toc-wrap h3 {
+  color: #333;
+}
+
+body.light-mode .toc-list a {
+  color: inherit;
+}
+
+/* ------------------------------------------------------
+   Auto Dark Mode Based on System Preference
+------------------------------------------------------ */
 @media (prefers-color-scheme: light) {
   body:not(.light-mode) {
     background-color: #f8f9fa;
     color: #212529;
   }
-  /* Add other light mode rules here if needed, or toggle class via JS */
 }
 
-/* Optional: Font Smoothing for Better Readability on Dark BGs (New Enhancement) */
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ------------------------------------------------------
+   Floating TOC for Article Pages
+------------------------------------------------------ */
+.toc-wrap {
+  float: right;
+  width: 280px;
+  margin: 0 0 1.25rem 2rem; /* space between TOC and main content */
+  padding: 0.75rem 0.75rem 0.75rem 1rem;
+  border-left: 3px solid #333; /* Dark mode border */
+  background: #0f0f0f; /* Dark mode bg */
+  font-size: 0.95rem;
+}
+
+.toc-wrap h3 {
+  margin-top: 0;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  color: #ddd;
+}
+
+.toc-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.toc-list li {
+  margin: 0.2rem 0;
+  line-height: 1.3;
+}
+
+.toc-list a {
+  text-decoration: none;
+  color: #ccc;
+  border-bottom: 1px dotted transparent;
+}
+
+.toc-list a:hover {
+  border-bottom-color: #66ccff;
+}
+
+.toc-list a.active-toc {
+  font-weight: 600;
+  border-bottom-color: #999;
+}
+
+/* Ensure headings don't hide under a fixed navbar when linked */
+h2, h3, h4 {
+  scroll-margin-top: 80px; /* adjust if your navbar is taller */
+}
+
+/* Clearfix for content after floating TOC */
+.post-content::after, .page-content::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* ------------------------------------------------------
+   Mobile/Tablet TOC (Inline, Not Floating)
+------------------------------------------------------ */
+@media (max-width: 992px) {
+  .toc-wrap {
+    float: none;
+    width: auto;
+    margin: 0 0 1rem 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
 }
