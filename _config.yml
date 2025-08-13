@@ -23,7 +23,7 @@ navbar-links:
   Projects: "projects"
   Certifications: "certifications"
   CTFs: "ctfs"
-  About: "aboutme"
+  "<span class='sr-only'>LinkedIn</span><i class='fab fa-linkedin' aria-hidden='true'></i>": "https://www.linkedin.com/in/bradredlien/"
   #Resources:
     #- Beautiful Jekyll: "https://beautifuljekyll.com"
     #- Learn markdown: "https://www.markdowntutorial.com/"
