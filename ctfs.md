@@ -4,8 +4,6 @@ title: CTFs
 permalink: /ctfs/
 ---
 
-# CTFs 
-
 Welcome! This page showcases the Capture the Flag (CTF) competitions and cybersecurity challenges I've participated in.
 
 ---
