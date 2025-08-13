@@ -22,7 +22,7 @@ author: Brad Redlien
 navbar-links:
   Projects: "projects"
   Certifications: "certifications"
-  CTF Writeups: "ctf-writeups"
+  CTFs: "ctfs"
   About: "aboutme"
   #Resources:
     #- Beautiful Jekyll: "https://beautifuljekyll.com"
