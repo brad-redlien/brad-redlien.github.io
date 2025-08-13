@@ -1,14 +1,14 @@
-<script>
 document.addEventListener('DOMContentLoaded', function () {
-  const content = document.querySelector('.post-content, .page-content');
+  // Select either post-content (blog/project) or page-content (normal page)
+  const content = document.querySelector('.post-content') || document.querySelector('.page-content');
+  if (!content) return; // no content found, do nothing
+
   const tocContainer = document.createElement('nav');
   tocContainer.className = 'toc-wrap';
   const tocTitle = document.createElement('h3');
   tocTitle.textContent = 'On This Page';
   const tocList = document.createElement('ul');
   tocList.className = 'toc-list';
-
-  if (!content) return; // no content found
 
   // Grab all headings inside the content
   const headings = content.querySelectorAll('h2, h3, h4');
@@ -49,4 +49,3 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 });
-</script>
