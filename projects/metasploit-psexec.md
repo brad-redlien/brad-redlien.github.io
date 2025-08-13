@@ -46,7 +46,7 @@ I concluded the project by terminating the Meterpreter and Netcat processes and 
     
 -   **Malware Containment & Eradication** – Terminated active Meterpreter and Netcat processes using PowerShell.
     
--   **Attack Simulation** – Executed PsExec exploitation and post-exploitation (hashdump, file exfiltration, Netcat listener creation) in a Proxmox lab.
+-   **Attack Simulation** – Executed PsExec exploitation and post-exploitation (`hashdump`, file exfiltration, Netcat listener creation) in a Proxmox lab.
 
 ## II. Lab Environment
 
@@ -62,7 +62,7 @@ Both VMs were on the same subnet. I verified connectivity from Windows using `Te
 
 ![Image 1](/assets/img/metasploit-psexec/1.png)
 
-From the Kali Linux machine, I ran `ping -c 5 192.168.55.2` to confirm that the Kali Linux machine can communicate with the Windows machine.
+From the Kali Linux machine, I ran `ping -c 5 192.168.55.2` to confirm that the Kali Linux machine could communicate with the Windows machine.
 
 ![Image 2](/assets/img/metasploit-psexec/2.png)
   
@@ -72,9 +72,9 @@ The goal of this project was to practice performing an incident investigation in
 
 I disabled Microsoft Defender via Group Policy by:
 
--   Opening `gpedit.msc` and navigating to Computer Configuration → Administrative Templates → Windows Components → Microsoft Defender Antivirus
+-   Opened `gpedit.msc` and navigated to Computer Configuration → Administrative Templates → Windows Components → Microsoft Defender Antivirus
     
--   Double-click “Turn off Microsoft Defender Antivirus” → set to Enabled → click Apply.
+-   Double-clicked “Turn off Microsoft Defender Antivirus” → set to Enabled → clicked Apply.
 
 ![Image 3](/assets/img/metasploit-psexec/3.png)    
 
@@ -94,19 +94,19 @@ I used Metasploit’s PsExec module for this attack, imitating how an attacker c
 
 Below are the steps to configure and launch the PsExec module in Metasploit on a Kali Linux VM:
 
-1.  Launch the msfconsole from the Kali Linux command line using the `msfconsole` command:
+ 1. Launch the msfconsole from the Kali Linux command line using the `msfconsole` command:
     
 ![Image 5](/assets/img/metasploit-psexec/5.png)
   
-2.  The command `info exploit/windows/smb/psexec` provides detail about the PsExec module:
+ 2. The command `info exploit/windows/smb/psexec` provides detail about the PsExec module:
 
 ![Image 6](/assets/img/metasploit-psexec/6.png)
 
-3.  Direct Metasploit to load the the PsExec module using the command: `use exploit/windows/smb/psexec`
+3. Direct Metasploit to load the the PsExec module using the command: `use exploit/windows/smb/psexec`
 
 ![Image 7](/assets/img/metasploit-psexec/7.png)
     
-4.  Configure PsExec options to target the Windows 10 machine:
+4. Configure PsExec options to target the Windows 10 machine:
 
 -   Set the Windows 10 machine’s IP address using the command `set RHOSTS 192.168.55.2`
  
@@ -120,7 +120,7 @@ Below are the steps to configure and launch the PsExec module in Metasploit on a
     
 ![Image 10](/assets/img/metasploit-psexec/10.png)
   
--   You can configure the TCP port that Metasploit will connect back on, but I left it as the default 4444. Use the set `LPORT` command to change the port number.
+-   You can configure the TCP port that Metasploit will connect back on, but I left it as the default 4444. Use the `set LPORT` command to change the port number.
 
 -   Review the configuration options using the `show options` command.
     
@@ -145,7 +145,7 @@ I ran the following commands from Meterpreter on the Windows 10 machine to simul
  
 -   `getpid` (provides the Process ID (PID) for the Meterpreter session)
 
--   `hashdump` (the Meterpreter hashdump command pulls password hashes)
+-   `hashdump` (the Meterpreter `hashdump` command pulls password hashes)
 
 ![Image 15](/assets/img/metasploit-psexec/16.png)    
 
@@ -165,7 +165,9 @@ I ran the following commands from Meterpreter on the Windows 10 machine to simul
 
 ![Image 20](/assets/img/metasploit-psexec/18.1.png)
     
-## IV. Blue Team Investigation using PowerShell & Sysmon
+## IV. Blue Team Metasploit Investigation using PowerShell & Sysmon
+
+I investigated the Metasploit/PsExec attack using PowerShell and Sysmon's logs.
 
 ### A. PowerShell Investigation
 
@@ -191,7 +193,7 @@ The output from this command showed:
   
 #### 2. Suspicious Process Investigation
 
-Next, I investigated the owning process IDs associated with the two network connections identified above (PID 8072 for port 4444 and PID 8708 for Port 5555) using the `Get-Process` command:
+Next, I investigated the owning process IDs associated with the two network connections identified above (PID 8072 for TCP/4444 and PID 8708 for TCP/5555) using the `Get-Process` command:
 
 `Get-Process -Id 8072,8708 | Select Id, ProcessName, Path, StartTime`
 
@@ -203,13 +205,13 @@ The `Get-Process` command confirmed that these two network connections are likel
 
 	-   Netcat is a well-known networking utility that is often used in living off the land and other attacks. Additionally, `nc.exe` is located in a non-standard Windows directory (the Temp directory), which is a common location where attackers stage their tools.
     
-	-   The `nc.exe` and its location are strong IOCs because no legitimate Windows process installs or runs Netcat from the Temp directory. Further, it's highly unlikely that a typical corporate Windows user runs Netcat for legitimate work purposes.
+	-   The `nc.exe` and its location are strong IOCs because no legitimate Windows process installs or runs Netcat from the Temp directory. Further, it's highly unlikely that a typical Windows user runs Netcat for legitimate work purposes.
 
 -  Powershell/`powershell.exe` (PID 8072):
 
-	-   `powershell.exe` launched less than 2 minutes before Netcat, suggesting PowerShell was a likely staging mechanism to launch `nc.exe` based on the process creation timeline.
+	-   `powershell.exe` launched less than two minutes before Netcat, suggesting PowerShell was a likely staging mechanism to launch `nc.exe` based on the process creation timeline.
     
-	-   As with `nc.exe`, it is unlikely that a typical corporate Windows user would use PowerShell for day-to-day tasks. PowerShell is often abused in fileless attacks and is a common living off the land tool.
+	-   As with `nc.exe`, it is unlikely that a typical Windows user would use PowerShell for day-to-day tasks. PowerShell is often abused in fileless attacks and is a common living off the land tool.
       
 
 #### 3. Detailed Process Investigation using `Get-CimInstance`
@@ -223,7 +225,7 @@ Next, I checked the full process details for PID 8708 and PID 8072 using the Pow
   ![Image 23](/assets/img/metasploit-psexec/32.png)
   ![Image 24](/assets/img/metasploit-psexec/32.1.png)
 
-`Get-CimInstance Win32_Process` gets the current state of running processes directly from WMI (Windows Management Instrumentation). `Get-CimInstance` provides more detail than `Get-Process` because `Get-CimInstance` provides not only the PID and name, but also more detail like the:
+`Get-CimInstance Win32_Process` gets the current state of running processes directly from WMI (Windows Management Instrumentation). `Get-CimInstance` provided more detail than `Get-Process` because `Get-CimInstance` provides not only the PID and name, but also more detail like the:
 
 -   Full executable path to detect odd locations, like Temp.
     
@@ -233,17 +235,17 @@ Next, I checked the full process details for PID 8708 and PID 8072 using the Pow
     
 -   Creation date.
     
-`Get-CimInstance` provided additional detail that PID 8708 (`nc.exe`) and PID 8072 (`powershell.exe`) were malicious:
+`Get-CimInstance` provided additional evidence that PID 8708 (`nc.exe`) and PID 8072 (`powershell.exe`) were malicious:
 
 -   Netcat/`nc.exe` (PID 8708):
     
 	-   `Get-CimInstance` provided the executable path, the command line, creation date, and Parent PID.
     
--   While `nc.exe` is a legitimate networking tool, the output here shows it is staged in the Temp folder (an unusual and high-risk location for an executable).
+	-   While `nc.exe` is a legitimate networking tool, the output here shows it is staged in the Temp folder (an unusual and high-risk location for an executable).
     
--   The command line information reveals the exact backdoor setup: listening (`-Ldp`) on port 5555, executing `cmd.exe` on connection - a reverse shell.
+	-   The command line information reveals the exact backdoor setup: listening (`-Ldp`) on port 5555, executing `cmd.exe` on connection - a reverse shell.
     
-- Parent PID (8072) ties it directly to the suspicious PowerShell process (discussed below).
+	- Parent PID (8072) ties it directly to the suspicious PowerShell process (discussed below).
     
 -   Powershell/`powershell.exe` (PID 8072):
     
@@ -315,7 +317,7 @@ I then filtered for `Sysmon Event ID 1` (Process Creation), which is useful in i
     
 The malicious service did not execute PowerShell directly. Instead, it first started `cmd.exe` as a wrapper, which then launched the PowerShell stager.
 
-#### MITRE ATT&CK Techniques:
+#### MITRE ATT&CK Mapping:
  
 -   T1569.002 — System Services: Service Execution ([https://attack.mitre.org/techniques/T1569/002/](https://attack.mitre.org/techniques/T1569/002/))
     
@@ -323,7 +325,7 @@ The malicious service did not execute PowerShell directly. Instead, it first sta
     
 #### 3. C2 Connection: Sysmon’s Network Connection Log
 
-After confirming in (2) Execution Stage that the malicious PsExec service launched `cmd.exe` as a wrapper to execute an obfuscated PowerShell stager, I next checked `Sysmon Event ID 3` to determine if the payload initiated a C2 connection. As detailed below, the `Sysmon Event ID 3` entry proved that the obfuscated PowerShell stager established a C2 session from the Windows 10 machine to the attacker.
+After confirming in **2. Execution Stage** that the malicious PsExec service launched `cmd.exe` as a wrapper to execute an obfuscated PowerShell stager, I next checked `Sysmon Event ID 3` to determine if the payload initiated a C2 connection. As detailed below, the `Sysmon Event ID 3` entry proved that the obfuscated PowerShell stager established a C2 session from the Windows 10 machine to the attacker.
 
 `Sysmon Event ID 3` records detailed network connection telemetry, including the process image, Process GUID, source/destination IP addresses, ports, and protocol.
 
@@ -345,12 +347,12 @@ The above screenshots show `Sysmon Event ID 3` records documenting the outbound 
 	-   Destination IP and Port (attacker machine): `192.168.55.60:4444`
     
 
-		-   Port 4444 is the default for a Metasploit reverse TCP payload, confirming that the PowerShell stager successfully connected back to the attacker’s Metasploit listener.
+		-   TCP/4444 is the default for a Metasploit reverse TCP payload, confirming that the PowerShell stager successfully connected back to the attacker’s Metasploit listener.
     
 
 -   The timestamp aligns with the process creation in the Executing Stage, showing a direct chain from service installation to process execution to network connection.
     
-#### MITRE ATT&CK mapping:
+#### MITRE ATT&CK Mapping:
 
 -   T1071.0001: Application Layer Protocol: Web Protocols [https://attack.mitre.org/techniques/T1071/001/](https://attack.mitre.org/techniques/T1071/001/)
     
@@ -380,7 +382,7 @@ The screenshots show the following key information:
 
 -   Netcat (`nc.exe`, PID 8708) was the parent process and `cmd.exe` was the child process. This chain proves that Netcat was configured to automatically spawn a Windows shell when the attacker connected.
     
--   Both `nc.exe` and its child process, `cmd.exe`, ran as NT AUTHORITY/ SYSTEM, granting the attacker admin control of the system.
+-   Both `nc.exe` and its child process, `cmd.exe`, ran as `NT AUTHORITY/ SYSTEM`, granting the attacker admin control of the system.
     
 -   The parent process, `nc.exe`, was executed from `C:\Windows\Temp`. This is a high risk location because the Temp directory is often used by attackers for staging tools.
     
@@ -394,9 +396,9 @@ The screenshots show the following key information:
     
 	-   `-e cmd.exe` (pass cmd.exe to the attacker’s machine when it connects)
     
-The Sysmon log provides MD5 and SHA256 hashes for cmd.exe, which an investigator could use to identify the specific binary on other machines or across the environment, or check the hash on VirusTotal or other threat intelligence databases.
+The Sysmon log provides MD5 and SHA256 hashes for cmd.exe, which an investigator could use to identify the specific binary on other machines in the environment, or check the hash on VirusTotal or other threat intelligence databases.
 
-#### MITRE ATT&CK mapping:
+#### MITRE ATT&CK Mapping:
 
 -   T1059.003 (Command and Scripting Interpreter: Windows Command Shell) [https://attack.mitre.org/techniques/T1059/003/](https://attack.mitre.org/techniques/T1059/003/)
     
@@ -434,7 +436,7 @@ This confirms that the attacker connected to the Netcat listener and established
     
 ## V. Terminating the Netcat & Meterpreter Processes with PowerShell
 
-Using PowerShell’s Stop-Process command, I terminated the Netcat backdoor (`nc.exe`) and the Meterpreter PowerShell stager processes. Before terminating the processes I confirmed the PIDs and that both processes were still running using `Get-Process`.
+Using PowerShell’s `Stop-Process` command, I terminated the Netcat backdoor (`nc.exe`) and the Meterpreter PowerShell stager processes. Before terminating the processes I confirmed the PIDs and that both processes were still running using `Get-Process`.
   
 ### 1.  Reconfirm the Netcat & PowerShell Process Ids
     
@@ -455,3 +457,5 @@ I ran the following commands to kill the two processes and verified that the pro
 `Get-Process -Id 8072,8708 | Select Id,ProcessName,Path,StartTime`
 
 ![Image 36](/assets/img/metasploit-psexec/41.png)
+
+In a real world incident response, an investigator would complete an incident response model like PICERL (Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned) or DAIR (the Dynamic Approach to Incident Response). Using the DAIR model, killing the two processes would not end the incident response, and I would continue with the DAIR's Scope, Contain, Eradicate, and Recover phases to fully resolve the incident throughout the environment. 
