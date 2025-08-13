@@ -30,6 +30,10 @@ layout: base
   </div>
 </main>
 
+{%- comment -%}
+  Load the TOC script only on pages where `toc: true` is set in front matter.
+  Placing it here (after </main>) ensures DOM elements exist before JS runs.
+{%- endcomment -%}
 {% if page.toc %}
   <script src="{{ '/assets/js/toc.js' | relative_url }}"></script>
 {% endif %}
