@@ -127,3 +127,35 @@ body.light-mode pre, body.light-mode code {
 h2, h3, h4 {
   scroll-margin-top: 80px; /* adjust if your navbar is taller */
 }
+
+.post-title {
+    font-size: 4rem;           /* Large and bold */
+    font-weight: 900;
+    text-align: center;        /* Center horizontally */
+    letter-spacing: 1px;       /* Slightly more open spacing */
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+
+    /* Gradient text */
+    background: linear-gradient(90deg, #2a9fd6, #66ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Fallback shadow in case gradient isn't supported */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Light mode variant: softer gradient */
+body.light-mode .post-title {
+    background: linear-gradient(90deg, #0056b3, #66ccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsive tweak for smaller devices */
+@media (max-width: 768px) {
+    .post-title {
+        font-size: 2.5rem;
+    }
+}
