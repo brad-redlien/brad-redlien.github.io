@@ -94,11 +94,11 @@ I used Metasploit’s PsExec module for this attack, imitating how an attacker c
 
 Below are the steps to configure and launch the PsExec module in Metasploit on a Kali Linux VM:
 
- 1. Launch the msfconsole from the Kali Linux command line using the `msfconsole` command:
+1. Launch the msfconsole from the Kali Linux command line using the `msfconsole` command:
     
 ![Image 5](/assets/img/metasploit-psexec/5.png)
   
- 2. The command `info exploit/windows/smb/psexec` provides detail about the PsExec module:
+2. The command `info exploit/windows/smb/psexec` provides detail about the PsExec module:
 
 ![Image 6](/assets/img/metasploit-psexec/6.png)
 
@@ -231,7 +231,7 @@ Next, I checked the full process details for PID 8708 and PID 8072 using the Pow
     
 -   Full original command line.
     
--   Parent PID
+-   Parent PID.
     
 -   Creation date.
     
@@ -285,11 +285,11 @@ The above screenshots from Event Viewer concern the Meterpreter/PsExec attack an
     
 	-   The command starts PowerShell with:
 
-		-   `-nop` (no profile);
+		-   `-nop` (no profile)
     
-		-   `-w hidden` (a hidden window); and
+		-   `-w hidden` (a hidden window)
     
-		-   `-noni` (no interactive prompt).
+		-   `-noni` (no interactive prompt)
    
 	-   Obfuscated Powershell script.
     
@@ -458,4 +458,4 @@ I ran the following commands to kill the two processes and verified that the pro
 
 ![Image 36](/assets/img/metasploit-psexec/41.png)
 
-In a real world incident response, an investigator would complete an incident response model like PICERL (Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned) or DAIR (the Dynamic Approach to Incident Response). Using the DAIR model, killing the two processes would not end the incident response, and I would continue with the DAIR's Scope, Contain, Eradicate, and Recover phases to fully resolve the incident throughout the environment. 
+In a real world incident response, an investigator would follow and complete an incident response model like PICERL (Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned) or DAIR (the Dynamic Approach to Incident Response). Using the DAIR model, killing the two processes would not end the incident response, and I would continue with the DAIR's Scope, Contain, Eradicate, and Recover phases to fully resolve the incident throughout the environment. 
