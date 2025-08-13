@@ -84,14 +84,6 @@ a:hover, a:visited, .navbar-brand, blockquote {
 }
 
 /* ------------------------------------------------------
-   Project Section Borders
------------------------------------------------------- */
-.post {
-  border-left: 3px solid #2a9fd6;
-  padding-left: 10px;
-}
-
-/* ------------------------------------------------------
    Accessibility/Mode Toggle - Light Mode Overrides
 ------------------------------------------------------ */
 body.light-mode {
