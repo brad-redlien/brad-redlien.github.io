@@ -25,10 +25,20 @@
             </div>
           </li>
         {% else %}
+          {% assign href = link[1] %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ link[1] | relative_url }}">{{ link[0] }}</a>
+            {% if href contains '://' %}
+              <a class="nav-link"
+                 href="{{ href }}"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                {{ link[0] }}
+              </a>
+            {% else %}
+              <a class="nav-link" href="{{ href | relative_url }}">{{ link[0] }}</a>
+            {% endif %}
           </li>
-        {%- endif -%}
+      {% endif %}
       {%- endfor -%}
       {% if site.post_search %}
         <li class="nav-item">
