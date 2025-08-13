@@ -29,3 +29,7 @@ layout: base
     </div>
   </div>
 </main>
+
+{% if page.toc %}
+  <script src="{{ '/assets/js/toc.js' | relative_url }}"></script>
+{% endif %}
