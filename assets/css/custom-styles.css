@@ -93,3 +93,45 @@ a:hover, a:visited, .navbar-brand, blockquote {
 
 /* ------------------------------------------------------
    Accessibility/Mode Toggle - Light Mode Overrides
+------------------------------------------------------ */
+body.light-mode {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+body.light-mode a {
+  color: #0056b3;
+}
+
+body.light-mode h1, body.light-mode h2, body.light-mode h3,
+body.light-mode h4, body.light-mode h5, body.light-mode h6 {
+  color: #003366;
+}
+
+body.light-mode .navbar {
+  background-color: #343a40;
+}
+
+body.light-mode .navbar a {
+  color: #ffffff;
+}
+
+body.light-mode pre, body.light-mode code {
+  background-color: #e0e0e0;
+  color: #111;
+}
+
+/* ------------------------------------------------------
+   Auto Dark Mode Based on System Preference
+------------------------------------------------------ */
+@media (prefers-color-scheme: light) {
+  body:not(.light-mode) {
+    background-color: #f8f9fa;
+    color: #212529;
+  }
+}
+
+/* Ensure headings don't hide under a fixed navbar when linked */
+h2, h3, h4 {
+  scroll-margin-top: 80px; /* adjust if your navbar is taller */
+}
