@@ -127,3 +127,103 @@ body.light-mode pre, body.light-mode code {
 h2, h3, h4 {
   scroll-margin-top: 80px; /* adjust if your navbar is taller */
 }
+
+/* ===== High-contrast navbar overrides (append to end) ===== */
+
+/* Base (dark mode by default in your theme) */
+.navbar,
+.navbar.navbar-default,
+.navbar.navbar-inverse {
+  background-color: #0b1020 !important;      /* deeper than #222 for contrast */
+  border-bottom: 1px solid #1f2937 !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+}
+
+/* Brand (your name, top-left) + nav links (top-right) */
+.navbar .navbar-brand,
+.navbar-brand,
+.navbar .nav > li > a,
+.navbar .navbar-nav > li > a,
+.navbar a.nav-link {
+  color: #f3f4f6 !important;                  /* near-white on dark bg */
+  font-weight: 600;
+  text-shadow: none !important;
+}
+
+/* Hover / focus / active */
+.navbar .nav > li > a:hover,
+.navbar .navbar-nav > li > a:hover,
+.navbar a.nav-link:hover,
+.navbar .nav > li > a:focus,
+.navbar .navbar-nav > li > a:focus {
+  color: #93c5fd !important;                  /* visible hover */
+  text-decoration: underline;
+}
+
+.navbar .nav > li.active > a,
+.navbar .navbar-nav > li.active > a,
+.navbar .nav > li > a:active {
+  color: #bfdbfe !important;
+  font-weight: 700;
+}
+
+/* Ensure the LinkedIn icon follows link color */
+.navbar .fa,
+.navbar [class*="fa-"],
+.navbar svg {
+  color: currentColor !important;
+  fill: currentColor !important;
+}
+
+/* Keyboard focus ring for a11y */
+.navbar a:focus-visible {
+  outline: 2px dashed #93c5fd !important;
+  outline-offset: 2px;
+}
+
+/* ===== Light mode specifics ===== */
+body.light-mode .navbar,
+@media (prefers-color-scheme: light) {
+  body:not(.light-mode) .navbar /* fallback if system is light */ {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #e5e7eb !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  }
+}
+
+body.light-mode .navbar .navbar-brand,
+body.light-mode .navbar .nav > li > a,
+body.light-mode .navbar .navbar-nav > li > a,
+@media (prefers-color-scheme: light) {
+  body:not(.light-mode) .navbar .navbar-brand,
+  body:not(.light-mode) .navbar .nav > li > a,
+  body:not(.light-mode) .navbar .navbar-nav > li > a {
+    color: #0f172a !important;                /* near-black on white */
+  }
+}
+
+body.light-mode .navbar .nav > li > a:hover,
+@media (prefers-color-scheme: light) {
+  body:not(.light-mode) .navbar .nav > li > a:hover {
+    color: #1d4ed8 !important;                /* accessible hover */
+    text-decoration: underline;
+  }
+}
+
+body.light-mode .navbar .fa,
+body.light-mode .navbar svg,
+@media (prefers-color-scheme: light) {
+  body:not(.light-mode) .navbar .fa,
+  body:not(.light-mode) .navbar svg {
+    color: currentColor !important;
+    fill: currentColor !important;
+  }
+}
+
+/* Optional: slightly larger clickable area */
+.navbar .navbar-nav > li > a,
+.navbar .navbar-brand {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  letter-spacing: .2px;
+}
