@@ -227,3 +227,127 @@ body.light-mode .navbar svg,
   padding-bottom: 14px;
   letter-spacing: .2px;
 }
+
+/* Everything after this is the new stylistic change */
+/* ===== Pro polish: tokens ===== */
+:root {
+  --bg: #060606;
+  --fg: #e5e7eb;
+  --muted: #9ca3af;
+  --link: #93c5fd;
+  --link-hover: #bfdbfe;
+  --border: rgba(255,255,255,.08);
+  --surface: #0b1020;             /* elevated surfaces */
+  --radius: 14px;                  /* consistent rounding */
+  --shadow: 0 8px 24px rgba(0,0,0,.35);
+  --gap-1: .5rem; --gap-2: .75rem; --gap-3: 1rem; --gap-4: 1.5rem; --gap-5: 2rem;
+}
+
+body.light-mode {
+  --bg: #ffffff;
+  --fg: #0f172a;
+  --muted: #475569;
+  --link: #1d4ed8;
+  --link-hover: #2563eb;
+  --border: #e5e7eb;
+  --surface: #ffffff;
+  --shadow: 0 10px 24px rgba(2,6,23,.08);
+}
+
+/* Base rhythm */
+body { color: var(--fg); line-height: 1.65; }
+
+/* Constrain readable width for posts */
+.container, .post-content { max-width: 880px; }
+
+/* Headings: scale + spacing */
+h1 { font-weight: 800; letter-spacing: -.01em; margin: var(--gap-5) 0 var(--gap-3); }
+h2 { font-weight: 700; letter-spacing: -.005em; margin: var(--gap-4) 0 var(--gap-2); }
+h3 { font-weight: 700; margin: var(--gap-3) 0 var(--gap-2); }
+.post-content p + h2, .post-content p + h3 { margin-top: var(--gap-5); }
+
+/* Paragraph spacing */
+.post-content p { margin: 0 0 var(--gap-3); }
+
+/* Lists: tighter, professional look */
+.post-content ul, .post-content ol { margin: 0 0 var(--gap-3) 1.25rem; }
+.post-content li { margin: .2rem 0; }
+
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; }
+a:focus-visible {
+  outline: 2px dashed var(--link);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.card, .project, .post-preview, .well {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--gap-4);
+}
+.card:hover, .post-preview:hover {
+  transform: translateY(-2px);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.btn, .btn-primary, .btn-default {
+  display:inline-block; font-weight:700; border-radius: 9999px;
+  padding: .6rem 1rem; border: 1px solid transparent;
+}
+.btn-primary, .btn.btn-primary {
+  background: var(--link); color: #fff;
+}
+.btn-primary:hover { background: var(--link-hover); }
+.btn-outline {
+  background: transparent; border-color: var(--border); color: var(--fg);
+}
+.btn-outline:hover { border-color: var(--link); color: var(--link); }
+
+.post-content img {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  display:block; margin: var(--gap-4) auto;
+  max-width:100%; height:auto;
+}
+figure { margin: var(--gap-4) 0; }
+figcaption { color: var(--muted); font-size: .9rem; margin-top: .5rem; text-align: center; }
+
+pre, code { border-radius: 10px; }
+pre { border: 1px solid var(--border); }
+
+table { border-collapse: collapse; width: 100%; margin: var(--gap-3) 0; }
+th, td { border-bottom: 1px solid var(--border); padding: .55rem .75rem; }
+th { text-align: left; font-weight: 700; }
+
+.section-header {
+  display:flex; align-items:baseline; gap:.6rem; margin: var(--gap-5) 0 var(--gap-3);
+}
+.section-header .rule {
+  flex:1; height:1px; background: var(--border);
+  transform: translateY(-.35rem);
+}
+
+.navbar { padding: .35rem 0; }
+.navbar .navbar-brand { font-weight: 800; letter-spacing: .2px; }
+.navbar .navbar-nav > li > a { padding: 14px 12px; }
+@media (max-width: 991px){
+  .navbar .navbar-nav > li > a { padding: 12px 10px; }
+}
+
+.site-footer, footer {
+  background: transparent;
+  border-top: 1px solid var(--border);
+  margin-top: var(--gap-5);
+  padding: var(--gap-4) 0;
+  color: var(--muted);
+}
+.site-footer a { color: var(--muted); }
+.site-footer a:hover { color: var(--link); text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}
