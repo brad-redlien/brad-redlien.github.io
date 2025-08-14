@@ -4,85 +4,95 @@ title: Brad Redlien
 subtitle: Attorney & Cybersecurity Student at SANS | Security Analyst, Incident Response, & GRC
 ---
 
-<!-- Manual Post Preview Block -->
-<article class="post-preview">
-  <h2 class="post-title">
-    <a href="{{ '/projects/metasploit-psexec/' | relative_url }}">
-      Blue Team Investigation of a Simulated Metasploit Attack
-    </a>
-  </h2>
-  <p class="post-meta">Posted on August 11, 2025</p>
-  <p>This project simulates a Metasploit PsExec attack in a controlled Proxmox lab, followed by an incident response investigation using PowerShell and Sysmon.</p>
-
-  <p>I used two virtual machines in my Proxmox lab environment:</p>
-
-  <ol>
-    <li><strong>Windows 10 workstation (victim):</strong> I disabled Windows Defender to allow realistic payload execution.</li>
-    <li><strong>Kali Linux system (attacker):</strong> I used Kali to launch the exploitation and post-exploitation actions.</li>
-  </ol>
-
-  <p>From the Kali machine, I used Metasploit’s PsExec module to gain <code>NT AUTHORITY\SYSTEM</code> access on the Windows 10 machine, then performed several post-exploitation actions:</p>
-
-  <ul>
-    <li>Credential dumping using <code>hashdump</code>.</li>
-    <li>System reconnaissance (<code>sysinfo</code>, <code>ps</code>, <code>getpid</code>).</li>
-    <li>File transfer (uploading <code>nc.exe</code>) and exfiltration.</li>
-    <li>Creating a Netcat backdoor for secondary C2 access.</li>
-  </ul>
-
-  <p>On the defender side, I investigated the incident using PowerShell and host-based forensics with Sysmon, configured with SwiftOnSecurity’s config. I identified:</p>
-
-  <ul>
-    <li>Malicious service creation.</li>
-    <li>Process execution chains.</li>
-    <li>Two outbound C2 connections to the attacker machine.</li>
-  </ul>
-
-  <p>I concluded the project by terminating the Meterpreter and Netcat processes and removing the backdoor binary (<code>nc.exe</code>).</p>
-  <p><a href="{{ '/projects/metasploit-psexec/' | relative_url }}"><strong>Read More →</strong></a></p>
-</article>
-<hr>
-
-<!-- Manual Post Preview Block -->
-<article class="post-preview">
-  <h2 class="post-title">
-    <a href="{{ '/projects/netcat-named-pipes/' | relative_url }}">
-      Creating and Defending Against Netcat Backdoor Shells with Named Pipes
-    </a>
-  </h2>
-  <p class="post-meta">Posted on July 17, 2025</p>
-  <p>
-    During the SANS SEC504 (Hacker Tools, Techniques, and Incident Handling) course, I learned how attackers use Netcat to create backdoor login shells, reverse shell backdoors, transfer files, and cause other mischief.
+<!-- HERO -->
+<header class="card" style="text-align:center; margin-top: 2rem;">
+  <h1 style="margin-bottom:.25rem;">Brad Redlien</h1>
+  <p class="subtitle" style="margin-bottom:1rem;color:var(--muted);">
+    Security Analyst • Incident Response • GRC Controls
   </p>
-  <p>
-    I created several VMs in Proxmox to learn how RITA detects C2 beaconing traffic, but I first wanted to practice using Netcat to create a backdoor login shell and a reverse shell backdoor. However, Ubuntu no longer supports the <code>-e</code> switch due to security restrictions. To work around this, I used the <code>mkfifo</code> command to create a named pipe — explained in detail below.
+  <div style="display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap;">
+    <a class="btn btn-primary" href="{{ '/projects/' | relative_url }}">View Projects</a>
+    <a class="btn btn-outline" href="{{ '/assets/Brad-Redlien-Resume.pdf' | relative_url }}">Résumé (PDF)</a>
+  </div>
+</header>
+
+<!-- SECTION HEADER -->
+<div class="section-header">
+  <h2>Projects</h2><div class="rule"></div>
+</div>
+
+<!-- PROJECT GRID -->
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1rem;">
+  <!-- Project Card 1 -->
+  <article class="card post-preview project">
+    <h3 class="post-title" style="margin-top:0;">
+      <a href="{{ '/projects/metasploit-psexec/' | relative_url }}">
+        Blue Team Investigation of a Simulated Metasploit Attack
+      </a>
+    </h3>
+    <p class="post-meta">Posted on August 11, 2025</p>
+    <p>
+      Simulated a Metasploit PsExec attack in a Proxmox lab, then performed IR using PowerShell and Sysmon.
+      Investigated malicious service creation, process chains, and two outbound C2 connections; terminated
+      Meterpreter/Netcat and removed the backdoor binary.
+    </p>
+    <div class="badges">
+      <span class="badge">IR</span>
+      <span class="badge">Sysmon</span>
+      <span class="badge">Windows</span>
+    </div>
+    <a class="btn btn-outline" href="{{ '/projects/metasploit-psexec/' | relative_url }}">Read case study</a>
+  </article>
+
+  <!-- Project Card 2 -->
+  <article class="card post-preview project">
+    <h3 class="post-title" style="margin-top:0;">
+      <a href="{{ '/projects/netcat-named-pipes/' | relative_url }}">
+        Creating and Defending Against Netcat Backdoor Shells with Named Pipes
+      </a>
+    </h3>
+    <p class="post-meta">Posted on July 17, 2025</p>
+    <p>
+      Built backdoor and reverse shells via named pipes to understand defender POV; documented prevention,
+      detection, and mitigation. Practiced traffic analysis and control recommendations after SEC504.
+    </p>
+    <div class="badges">
+      <span class="badge">Linux</span>
+      <span class="badge">Netcat</span>
+      <span class="badge">Detection</span>
+    </div>
+    <a class="btn btn-outline" href="{{ '/projects/netcat-named-pipes/' | relative_url }}">Read case study</a>
+  </article>
+
+  <!-- Add more project cards as needed -->
+</div>
+
+<!-- OPTIONAL: Evidence/Signal section (short, professional) -->
+<div class="section-header">
+  <h2>Outcomes</h2><div class="rule"></div>
+</div>
+<div class="card" style="padding-top:1rem;">
+  <table>
+    <thead>
+      <tr><th>Use Case</th><th>Signal</th><th>Noise</th><th>Technique</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>PsExec Intrusion</td><td>Service creation + C2</td><td>Reduced</td><td>Sysmon 1/7/25 config mapping</td></tr>
+      <tr><td>Named Pipe Backdoor</td><td>Pipe + suspicious net use</td><td>Reduced</td><td>Process/pipe correlation</td></tr>
+    </tbody>
+  </table>
+  <div class="evidence" style="margin-top:1rem;">
+    <strong>Evidence.</strong> Linked case studies include commands, artifacts, and before/after alert volume where applicable.
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="card" style="text-align:center;">
+  <p class="subtitle" style="margin:0 0 .75rem; color:var(--muted);">
+    Interested in Security Analyst, SOC, or GRC roles.
   </p>
-  <p>
-    Finally, I share steps defenders can take to prevent, detect, and mitigate Netcat-based reverse shells using named pipes.
-  </p>
-  <p><a href="{{ '/projects/netcat-named-pipes/' | relative_url }}"><strong>Read More →</strong></a></p>
-</article>
-<hr>
-
-<!-- Manual Post Preview Block -->
-<article class="post-preview">
-  <h2 class="post-title">
-    <a href="/ctf-writeups/">
-      National Cyber League Spring 2025 CTF
-    </a>
-  </h2>
-  <p class="post-meta">Posted on May 1, 2025</p>
-
-  <img src="/assets/img/NCL-Team-Game.png" alt="NCL Spring 2025 Team Game" style="max-width:100%; height:auto; margin: 1em 0;" />
-
-  <p>
-    I competed with six other SANS classmates in the NCL Spring 2025 Team Game, placing <strong>63rd out of 4,798 teams nationwide</strong>, ranking within the <strong>top 1.3%</strong> of all competitors. The CTF ran from Friday, April 25 through Sunday, April 27.
-  </p>
-  <p>
-    Throughout the event, I gained hands-on experience across several cybersecurity domains, including log analysis, network scanning and reconnaissance, network traffic analysis, password cracking, and more. I was able to apply many of the techniques I learned from SEC401 (GSEC) and SEC504 (GCIH).
-  </p>
-  <a href="/ctf-writeups/"><strong>Read More →</strong></a>
-</article>
-<hr>
-
-
+  <div style="display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap;">
+    <a class="btn btn-primary" href="{{ '/contact/' | relative_url }}">Contact Me</a>
+    <a class="btn btn-outline" href="https://www.linkedin.com/in/bradredlien/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</div>
