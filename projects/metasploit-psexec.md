@@ -265,7 +265,7 @@ In sum, `Get-CimInstance` established:
     
 ### B. Sysmon Investigation
 
-#### 1. Initial Access Stage: Identifying the Initial Metasploit/PsExec Service Creation in Sysmon’s System Logs
+#### 1. Identifying the Initial Metasploit/PsExec Service Creation in Windows System Logs (Event ID 7045)
 
 I first checked the System logs in Event Viewer (Event Viewer → Windows Logs → System). I filtered the System log for `Event ID 7045` (Service Control Manager Event: “A service was installed in the system”). `Event ID 7045` means that a new service was installed, and the Metasploit PsExec module installs a temporary service.
 
