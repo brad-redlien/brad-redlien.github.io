@@ -6,6 +6,24 @@ permalink: /certifications/
 
 Cybersecurity certifications focused on intrusion analysis, incident response, network defense, cloud technologies, and enterprise security operations. GIAC certifications were earned through the SANS Technology Institute Bachelor of Applied Cybersecurity program.
 
+## Certifications
+
+### Cybersecurity Certifications
+
+- GCIA (GIAC Certified Intrusion Analyst)
+- GCIH (GIAC Certified Incident Handler)
+- GSEC (GIAC Security Essentials Certification)
+- CompTIA Security+
+- GISF (GIAC Information Security Fundamentals)
+- GFACT (GIAC Foundational Cybersecurity Technologies)
+
+### Infrastructure & Cloud Certifications
+
+- Microsoft Azure Fundamentals
+- CompTIA Network+
+- Linux Essentials
+- CompTIA A+
+
 ## Credly Badge Showcase
 
 You can view and verify my badges directly on my [Credly Profile](https://www.credly.com/users/brad-redlien.bdf8979c).
@@ -36,20 +54,3 @@ You can view and verify my badges directly on my [Credly Profile](https://www.cr
 
 <!-- Load Credly Embed Script (only once) -->
 <script type="text/javascript" async src="//cdn.c
-
-## Certifications
-
-### Cybersecurity Certifications
-
-- GCIA (GIAC Certified Intrusion Analyst)
-- GCIH (GIAC Certified Incident Handler)
-- GSEC (GIAC Security Essentials Certification)
-- CompTIA Security+
-- GISF (GIAC Information Security Fundamentals)
-- GFACT (GIAC Foundational Cybersecurity Technologies)
-
-### Infrastructure & Cloud Certifications
-- Microsoft Azure Fundamentals
-- CompTIA Network+
-- Linux Essentials
-- CompTIA A+
