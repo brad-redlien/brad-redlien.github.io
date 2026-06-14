@@ -6,6 +6,7 @@ permalink: /certifications/
 
 ## Certifications
 
+- GCIA (GIAC Certified Intrusion Analyst)
 - GIAC (GIAC Certified Incident Handler)
 - GSEC (GIAC Security Essentials Certification)
 - CompTIA Security+
@@ -28,6 +29,8 @@ You can view and verify my badges directly on my [Credly Profile](https://www.cr
 ## Featured Badges
 
 <div style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
+
+<div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="010e620e-4b91-42ea-86a9-6a9c04314f8b" data-share-badge-host="https://www.credly.com"></div>
 
 <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="19d48528-ac66-4988-ab16-836ce5dc8aae" data-share-badge-host="https://www.credly.com"></div>
   
