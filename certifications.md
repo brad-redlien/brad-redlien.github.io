@@ -19,7 +19,7 @@ Cybersecurity certifications focused on intrusion analysis, incident response, n
 
 ### Infrastructure & Cloud Certifications
 
-- Microsoft Azure Fundamentals
+- Microsoft Certified: Azure Fundamentals
 - CompTIA Network+
 - Linux Essentials
 - CompTIA A+
