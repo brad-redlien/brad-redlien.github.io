@@ -4,34 +4,11 @@ title: Certifications
 permalink: /certifications/
 ---
 
-Cybersecurity certifications focused on network defense, incident response, intrusion analysis, cloud fundamentals, and enterprise security operations. My GIAC certifications were earned through the SANS Technology Institute undergraduate cybersecurity program.
-
-## Certifications
-
-### Cybersecurity Certifications
-
-- GCIA (GIAC Certified Intrusion Analyst)
-- GCIH (GIAC Certified Incident Handler)
-- GSEC (GIAC Security Essentials Certification)
-- CompTIA Security+
-- GFACT (GIAC Foundational Cybersecurity Technologies)
-- GISF (GIAC Information Security Fundamentals)
-
-### Infrastructure & Cloud Certifications
-- Microsoft Azure Fundamentals
-- CompTIA Network+
-- Linux Essentials
-- Microsoft Certified: Azure Fundamentals
-- CompTIA A+
-
-
----
+Cybersecurity certifications focused on intrusion analysis, incident response, network defense, cloud technologies, and enterprise security operations. GIAC certifications were earned through the SANS Technology Institute Bachelor of Applied Cybersecurity program.
 
 ## Credly Badge Showcase
 
 You can view and verify my badges directly on my [Credly Profile](https://www.credly.com/users/brad-redlien.bdf8979c).
-
----
 
 ## Featured Badges
 
@@ -58,7 +35,21 @@ You can view and verify my badges directly on my [Credly Profile](https://www.cr
 </div>
 
 <!-- Load Credly Embed Script (only once) -->
-<script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+<script type="text/javascript" async src="//cdn.c
 
----
+## Certifications
 
+### Cybersecurity Certifications
+
+- GCIA (GIAC Certified Intrusion Analyst)
+- GCIH (GIAC Certified Incident Handler)
+- GSEC (GIAC Security Essentials Certification)
+- CompTIA Security+
+- GISF (GIAC Information Security Fundamentals)
+- GFACT (GIAC Foundational Cybersecurity Technologies)
+
+### Infrastructure & Cloud Certifications
+- Microsoft Azure Fundamentals
+- CompTIA Network+
+- Linux Essentials
+- CompTIA A+
