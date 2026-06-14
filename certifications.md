@@ -4,16 +4,23 @@ title: Certifications
 permalink: /certifications/
 ---
 
+Cybersecurity certifications focused on network defense, incident response, intrusion analysis, cloud fundamentals, and enterprise security operations. My GIAC certifications were earned through the SANS Technology Institute undergraduate cybersecurity program.
+
 ## Certifications
 
+### Cybersecurity Certifications
+
 - GCIA (GIAC Certified Intrusion Analyst)
-- GIAC (GIAC Certified Incident Handler)
+- GCIH (GIAC Certified Incident Handler)
 - GSEC (GIAC Security Essentials Certification)
 - CompTIA Security+
-- GISF (GIAC Information Security Fundamentals)
 - GFACT (GIAC Foundational Cybersecurity Technologies)
+- GISF (GIAC Information Security Fundamentals)
+
+### Infrastructure & Cloud Certifications
+- Microsoft Azure Fundamentals
 - CompTIA Network+
-- LE-1: Linux Essentials
+- Linux Essentials
 - Microsoft Certified: Azure Fundamentals
 - CompTIA A+
 
