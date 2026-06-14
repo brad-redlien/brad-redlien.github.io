@@ -53,4 +53,4 @@ You can view and verify my badges directly on my [Credly Profile](https://www.cr
 </div>
 
 <!-- Load Credly Embed Script (only once) -->
-<script type="text/javascript" async src="//cdn.c
+<script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
