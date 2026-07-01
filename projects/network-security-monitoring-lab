@@ -1,4 +1,4 @@
-# Building a Enterprise Style Network Security Monitoring Lab with Proxmox, Arkime, Suricata, Zeek, and SiLK
+# Building a Network Security Monitoring Lab with Proxmox, Arkime, Suricata, Zeek, and SiLK
 
 *A Blue Team home lab for packet capture, intrusion detection, protocol analysis, and flow analytics.*
 
@@ -8,9 +8,26 @@
 
 After earning the SANS GCIA (GIAC Certified Intrusion Analyst), I wanted to continue developing the network analysis skills covered in the course by building a home lab that resembles an enterprise network security monitoring (NSM) environment.
 
-While I initially experimented with Security Onion (which is an excellent platform), I realized I wanted a better understanding of how the individual components work together. What I built covers full packet capture through intrusion detection, protocol analysis, and flow analytics.
+While I initially experimented with Security Onion (which is an excellent platform), I realized I wanted a better understanding of how the individual components work together. The lab I built provides full packet capture, intrusion detection, protocol analysis, and flow analytics using individual open-source components.
 
 Rather than deploying a single appliance, I decided to build the monitoring pipeline myself. After several weekends of troubleshooting, rebuilding configurations, and validating data at each stage, I now have an open source NSM platform that I can use for incident response practice, malware analysis, threat hunting, and future Blue Team projects.
+
+---
+
+## Lab Specifications
+
+| Component | Technology |
+|------------|------------|
+| Hypervisor | Proxmox VE 9.2 |
+| Sensor OS | Ubuntu 26.04 LTS |
+| Packet Capture | Arkime |
+| IDS | Suricata |
+| Protocol Analysis | Zeek |
+| Flow Analytics | SiLK + YAF |
+| Traffic Mirroring | Open vSwitch |
+| Attacker VM | Kali Linux |
+| Target VM | Metasploitable 2 |
+| Packet Storage | 4 TB External SSD |
 
 ---
 
@@ -23,7 +40,7 @@ My objectives for this lab were to:
 - Generate IDS alerts
 - Create protocol metadata
 - Generate flow records
-- The ability to correlate alerts, packets, protocol metadata, and flow records during investigations
+- Correlate alerts, packets, protocol metadata, and flow records during investigations
 - Build a platform for future malware analysis and incident response exercises
 - Gain practical experience with tools encountered in enterprise SOC environments
 
@@ -42,12 +59,12 @@ The lab consists of:
 - Open vSwitch traffic mirroring
 - A 4 TB external drive for full packet capture
 
-Traffic never passes through the sensor directly. Instead, the open vSwitch creates a mirrored copy of traffic between the attacker and target systems. This mimics how production network taps and SPAN ports operate.
+Traffic never passes through the sensor directly. Instead, the Open vSwitch creates a mirrored copy of traffic between the attacker and target systems. This mimics how production network taps and SPAN ports operate.
 
 ---
 **Figure 1 – Proxmox Virtual Environment**
 
-![Proxmox](/assets/img/network-security-monitoring-lab/1.png)
+![Proxmox](/assets/img/network-security-monitoring-lab/proxmox-overview.png)
 
 ---
 
@@ -57,7 +74,7 @@ Traffic never passes through the sensor directly. Instead, the open vSwitch crea
 
 Arkime is the full packet capture platform.
 
-It continuously captures network traffic while indexing packets for retrieval during investigations. Unlike traditional packet captures that can be difficult to search, Arkime allows you to locate and reconstruct individual sessions within seconds.
+It continuously captures network traffic while indexing packets for retrieval during investigations. Unlike traditional packet captures that can be difficult to search, Arkime allows me to locate and reconstruct individual sessions within seconds.
 
 Arkime provides:
 
@@ -73,9 +90,9 @@ Rather than relying solely on IDS alerts, I can retrieve the complete packet his
 
 **Figure 3 – Arkime Session**
 
-![Arkime Session](/assets/img/network-security-monitoring-lab/3.png)
+![Arkime Session](/assets/img/network-security-monitoring-lab/arkime-session-list.png)
 
-![Arkime Session](/assets/img/network-security-monitoring-lab/4.png)
+![Arkime Session](/assets/img/network-security-monitoring-lab/arkime-http-session.png)
 
 ---
 
@@ -100,7 +117,7 @@ One of my future goals is to begin writing custom Suricata detection rules as I 
 
 **Figure 4 – Suricata Eve JSON Alerts**
 
-![Suricata](/assets/img/network-security-monitoring-lab/6.png)
+![Suricata](/assets/img/network-security-monitoring-lab/suricata-eve-json.png)
 
 ---
 
@@ -156,13 +173,13 @@ Flow data complements packet captures by allowing analysts to identify scanning 
 
 **Figure 5 – SiLK Flow Records (rwcut)**
 
-![SiLK](/assets/img/network-security-monitoring-lab/8.png)
+![SiLK](/assets/img/network-security-monitoring-lab/silk-rwcut.png)
 
 ---
 
 **Figure 6 – SiLK Statistics (rwstats)**
 
-![SiLK](/assets/img/network-security-monitoring-lab/9.png)
+![SiLK](/assets/img/network-security-monitoring-lab/silk-rwstats.png)
 
 ---
 
@@ -176,7 +193,7 @@ After deploying the monitoring platform, I generated test traffic from Kali Linu
 - SMB traffic
 - Various TCP protocol connections
 
-I independently validated that each layer was functioning correctly:
+Rather than assuming the platform was working correctly, I independently validated each stage of the monitoring pipeline:
 
 - tcpdump confirmed mirrored traffic reached the sensor.
 - Arkime reconstructed captured sessions.
@@ -188,13 +205,13 @@ I independently validated that each layer was functioning correctly:
 
 **Figure 7 – tcpdump Validating Mirrored Traffic**
 
-![tcpdump](/assets/img/network-security-monitoring-lab/11.png)
+![tcpdump](/assets/img/network-security-monitoring-lab/tcpdump-validation.png)
 
 ---
 
 **Figure 8 – Wireshark Verification**
 
-![Wireshark](/assets/img/network-security-monitoring-lab/5.png)
+![Wireshark](/assets/img/network-security-monitoring-lab/wireshark-http-session.png)
 
 ---
 
@@ -220,7 +237,7 @@ Some of the challenges included:
 
 One of the major lessons from GCIA is that no single tool provides complete visibility into network activity.
 
-Each component answers a different investigative question.
+Each component provides a different perspective on the same network activity.
 
 | Tool | Primary Purpose |
 |------|-----------------|
@@ -235,7 +252,7 @@ Together, these tools provide multiple perspectives of the same network activity
 
 # Example Investigation Workflow
 
-For example, an investigation will follow the following workflow:
+A typical investigation in my lab follows this workflow:
 
 ```text
 Nmap Scan
@@ -297,7 +314,7 @@ Each of these topics will become its own portfolio article as the lab continues 
 
 Building this platform reinforced that effective network investigations rely on multiple complementary sources of telemetry.
 
-Packet captures, IDS alerts, protocol metadata, and flow records each reveal different aspects of the same network activity. Building and troubleshooting each stage of that pipeline gave me a much deeper understanding of enterprise network monitoring than simply deploying an all-in-one solution.
+Packet captures, IDS alerts, protocol metadata, and flow records each reveal different aspects of the same network activity. Building, validating, and troubleshooting each stage of that pipeline gave me a much deeper understanding of enterprise network monitoring than simply deploying an all-in-one solution.
 
 More importantly, the process reminded me that successful defenders don't just use security tools—they understand how the underlying telemetry is collected, validated, and correlated during an investigation.
 
