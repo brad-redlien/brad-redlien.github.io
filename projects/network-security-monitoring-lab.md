@@ -1,9 +1,8 @@
 ---
-title: "Building a Network Security Monitoring Lab"
+layout: page
+title: "Enterprise Network Security Monitoring Lab"
 permalink: /projects/network-security-monitoring-lab/
 ---
-
-# Building a Network Security Monitoring Lab with Proxmox, Arkime, Suricata, Zeek, and SiLK
 
 *A Blue Team home lab for packet capture, intrusion detection, protocol analysis, and flow analytics.*
 
