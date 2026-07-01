@@ -351,3 +351,52 @@ th { text-align: left; font-weight: 700; }
 @media (prefers-reduced-motion: reduce) {
   * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
 }
+
+/* ===== Project tables: dark theme fix ===== */
+
+.post-content table,
+.post-content table.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  background: #0b1020 !important;
+  color: #e5e7eb !important;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.post-content table thead th,
+.post-content table.table thead th {
+  background: #1f2937 !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  border: 1px solid rgba(255,255,255,.18);
+  padding: 0.8rem 1rem;
+}
+
+.post-content table tbody tr,
+.post-content table.table tbody tr,
+.post-content table.table-striped tbody tr {
+  background: #0b1020 !important;
+}
+
+.post-content table tbody tr:nth-child(even),
+.post-content table.table tbody tr:nth-child(even),
+.post-content table.table-striped tbody tr:nth-child(even) {
+  background: #111827 !important;
+}
+
+.post-content table td,
+.post-content table.table td,
+.post-content table.table-striped td {
+  background: transparent !important;
+  color: #e5e7eb !important;
+  border: 1px solid rgba(255,255,255,.12);
+  padding: 0.8rem 1rem;
+}
+
+.post-content table tbody tr:hover,
+.post-content table.table tbody tr:hover {
+  background: #1e293b !important;
+}
