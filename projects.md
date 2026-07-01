@@ -19,7 +19,7 @@ Security engineering, detection engineering, incident response, and malware anal
   <p class="post-meta">Posted on June 30, 2026</p>
 
   <p>
-    Designed and built an enterprise-style Network Security Monitoring (NSM) home lab from the ground up using Proxmox,
+    Designed and built a Network Security Monitoring (NSM) home lab from the ground up using Proxmox,
     Arkime, Suricata, Zeek, SiLK, YAF, Open vSwitch, and Metasploitable 2. The project documents the complete monitoring
     pipeline from full packet capture and IDS alerting to protocol metadata and flow analytics, along with the
     troubleshooting required to validate each stage of the telemetry pipeline.
