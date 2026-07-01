@@ -356,7 +356,9 @@ th { text-align: left; font-weight: 700; }
 
 .post-content table,
 .post-content table.table {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  display: inline-table;
   border-collapse: collapse;
   margin: 1.5rem 0;
   background: #0b1020 !important;
