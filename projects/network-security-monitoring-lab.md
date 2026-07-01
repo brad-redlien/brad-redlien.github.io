@@ -21,18 +21,26 @@ Rather than deploying a single appliance, I decided to build the monitoring pipe
 
 ## Lab Specifications
 
-| Component | Technology |
-|------------|------------|
-| Hypervisor | Proxmox VE 9.2 |
-| Sensor OS | Ubuntu 26.04 LTS |
-| Packet Capture | Arkime |
-| IDS | Suricata |
-| Protocol Analysis | Zeek |
-| Flow Analytics | SiLK + YAF |
-| Traffic Mirroring | Open vSwitch |
-| Attacker VM | Kali Linux |
-| Target VM | Metasploitable 2 |
-| Packet Storage | 4 TB External SSD |
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Technology</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Hypervisor</td><td>Proxmox VE 9.2</td></tr>
+    <tr><td>Sensor OS</td><td>Ubuntu 26.04 LTS</td></tr>
+    <tr><td>Packet Capture</td><td>Arkime</td></tr>
+    <tr><td>IDS</td><td>Suricata</td></tr>
+    <tr><td>Protocol Analysis</td><td>Zeek</td></tr>
+    <tr><td>Flow Analytics</td><td>SiLK + YAF</td></tr>
+    <tr><td>Traffic Mirroring</td><td>Open vSwitch</td></tr>
+    <tr><td>Attacker VM</td><td>Kali Linux</td></tr>
+    <tr><td>Target VM</td><td>Metasploitable 2</td></tr>
+    <tr><td>Packet Storage</td><td>4 TB External SSD</td></tr>
+  </tbody>
+</table>
 
 ---
 
@@ -251,12 +259,20 @@ One of the major lessons from GCIA is that no single tool provides complete visi
 
 Each component provides a different perspective on the same network activity.
 
-| Tool | Primary Purpose |
-|------|-----------------|
-| Arkime | Full packet capture |
-| Suricata | Threat detection and IDS alerts |
-| Zeek | Protocol metadata |
-| SiLK | Network flow analytics |
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Tool</th>
+      <th>Primary Purpose</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Arkime</td><td>Full packet capture</td></tr>
+    <tr><td>Suricata</td><td>Threat detection and IDS alerts</td></tr>
+    <tr><td>Zeek</td><td>Protocol metadata</td></tr>
+    <tr><td>SiLK</td><td>Network flow analytics</td></tr>
+  </tbody>
+</table>
 
 Together, these tools provide multiple perspectives of the same network activity, enabling more effective investigations than any individual tool could provide alone.
 
@@ -299,6 +315,7 @@ SiLK
 Wireshark
 (Deep packet analysis)
 ```
+
 
 Each layer contributes context, allowing me to move from broad threat hunting to packet-level analysis.
 
