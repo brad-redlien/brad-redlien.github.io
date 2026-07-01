@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Enterprise Network Security Monitoring Lab"
+title: "Network Security Monitoring Lab"
 permalink: /projects/network-security-monitoring-lab/
 ---
 
@@ -71,7 +71,9 @@ The lab consists of:
 - Open vSwitch traffic mirroring
 - A 4 TB external drive for full packet capture
 
-Traffic never passes through the sensor directly. Instead, the Open vSwitch creates a mirrored copy of traffic between the attacker and target systems. This mimics how production network taps and SPAN ports operate.
+I intentionally limited the monitoring scope to the mirrored traffic exchanged between the Kali attacker VM and the Metasploitable 2 target VM. This provides a controlled environment for validating packet capture, intrusion detection, protocol analysis, and flow analytics before expanding the sensor to monitor additional virtual networks and lab systems. The architecture is designed to scale as new hosts and attack scenarios are introduced.
+
+The sensor operates passively. Traffic never traverses the sensor directly. Instead, the Open vSwitch mirrors a copy of the traffic from the monitored virtual switch to the NSM sensor for analysis.
 
 ---
 
