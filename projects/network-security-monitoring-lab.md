@@ -20,7 +20,7 @@ Rather than deploying a single appliance, I decided to build the monitoring pipe
 
 ## Lab Specifications
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Component</th>
@@ -258,7 +258,7 @@ One of the major lessons from GCIA is that no single tool provides complete visi
 
 Each component provides a different perspective on the same network activity.
 
-<table class="table">
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Tool</th>
