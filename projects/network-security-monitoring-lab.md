@@ -165,7 +165,7 @@ SiLK provides another important layer by converting packet captures into searcha
 
 While Arkime captures every packet, SiLK summarizes communication into flow records that I can quickly search.
 
-I spent considerable time working with SiLK during GCIA, but assembling the entire toolchain proved more ~~frustrating~~ challenging than I expected.
+I spent considerable time working with SiLK during GCIA, but assembling the entire toolchain proved more challenging than I expected.
 
 After compiling Carnegie Mellon's latest release from source, I built the following pipeline:
 
