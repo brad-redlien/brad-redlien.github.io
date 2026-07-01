@@ -6,11 +6,11 @@
 
 ## Introduction
 
-After earning the SANS GCIA (GIAC Certified Intrusion Analyst), I wanted to continue developing the network analysis skills covered in the course by building a home lab that more closely resembles an enterprise Network Security Monitoring (NSM) environment.
+After earning the SANS GCIA (GIAC Certified Intrusion Analyst), I wanted to continue developing the network analysis skills covered in the course by building a home lab that resembles an enterprise network security monitoring (NSM) environment.
 
-While I initially experimented with Security Onion (which is an excellent platform), I realized I wanted a deeper understanding of how the individual components work together—from full packet capture through intrusion detection, protocol analysis, and flow analytics.
+While I initially experimented with Security Onion (which is an excellent platform), I realized I wanted a better understanding of how the individual components work together. What I built covers full packet capture through intrusion detection, protocol analysis, and flow analytics.
 
-Rather than deploying a single appliance, I decided to build the monitoring pipeline myself. After several weekends of troubleshooting, rebuilding configurations, and validating data at each stage, I now have an open-source NSM platform that I can use for incident response practice, malware analysis, threat hunting, and future Blue Team projects.
+Rather than deploying a single appliance, I decided to build the monitoring pipeline myself. After several weekends of troubleshooting, rebuilding configurations, and validating data at each stage, I now have an open source NSM platform that I can use for incident response practice, malware analysis, threat hunting, and future Blue Team projects.
 
 ---
 
@@ -19,30 +19,30 @@ Rather than deploying a single appliance, I decided to build the monitoring pipe
 My objectives for this lab were to:
 
 - Capture 100% of network traffic
-- Preserve packets for later forensic analysis
+- Preserve packets for forensic analysis
 - Generate IDS alerts
-- Produce protocol metadata
-- Generate searchable flow records
-- Correlate alerts, packets, protocol metadata, and flow records during investigations
+- Create protocol metadata
+- Generate flow records
+- The ability to correlate alerts, packets, protocol metadata, and flow records during investigations
 - Build a platform for future malware analysis and incident response exercises
-- Gain practical experience with tools frequently encountered in enterprise SOC environments
+- Gain practical experience with tools encountered in enterprise SOC environments
 
 ---
 
 # Lab Architecture
 
-The environment is hosted on a Proxmox virtualization server running on a repurposed System76 Pangolin laptop upgraded with additional memory.
+I host the lab environment on a Proxmox virtualization server running on a repurposed System76 Pangolin 10 laptop upgraded with additional memory.
 
 The lab consists of:
 
 - Proxmox Virtual Environment
 - Kali Linux (attacker)
 - Metasploitable 2 (target)
-- Ubuntu-based NSM sensor
+- Ubuntu NSM sensor
 - Open vSwitch traffic mirroring
-- Dedicated 4 TB storage for full packet capture
+- A 4 TB external drive for full packet capture
 
-Traffic never passes through the sensor directly. Instead, Open vSwitch creates a mirrored copy of traffic between the attacker and target systems, closely matching how production network taps and SPAN ports operate.
+Traffic never passes through the sensor directly. Instead, the open vSwitch creates a mirrored copy of traffic between the attacker and target systems. This mimics how production network taps and SPAN ports operate.
 
 ---
 
@@ -62,9 +62,9 @@ Traffic never passes through the sensor directly. Instead, Open vSwitch creates 
 
 ## Arkime
 
-Arkime serves as the full packet capture platform.
+Arkime is the full packet capture platform.
 
-It continuously captures network traffic while indexing packets for rapid retrieval during investigations. Unlike traditional packet captures that quickly become difficult to search, Arkime makes it possible to locate and reconstruct individual sessions within seconds.
+It continuously captures network traffic while indexing packets for retrieval during investigations. Unlike traditional packet captures that can be difficult to search, Arkime allows you to locate and reconstruct individual sessions within seconds.
 
 Arkime provides:
 
@@ -72,9 +72,9 @@ Arkime provides:
 - Packet indexing
 - Session reconstruction
 - Packet retrieval
-- Web-based investigation interface
+- Web investigation interface
 
-Rather than relying solely on IDS alerts, I can retrieve the complete packet history for any connection and inspect exactly what occurred on the wire.
+Rather than relying solely on IDS alerts, I can retrieve the complete packet history for any connection and inspect exactly what occurred on the wire (something that GCIA emphasized).
 
 ---
 
@@ -86,7 +86,7 @@ Rather than relying solely on IDS alerts, I can retrieve the complete packet his
 
 ## Suricata
 
-Suricata provides real-time intrusion detection using the Emerging Threats ruleset while also performing protocol identification and application-layer analysis.
+Suricata provides intrusion detection using the Emerging Threats ruleset while also performing protocol identification and application layer analysis.
 
 During deployment I validated:
 
@@ -97,7 +97,7 @@ During deployment I validated:
 - Eve JSON logging
 - Fast log output
 
-One interesting troubleshooting issue involved Ubuntu naming the mirrored interface `ens19`, while my original Suricata configuration referenced `eth19`. After correcting the interface configuration, Suricata immediately began processing mirrored traffic and generating alerts.
+One interesting troubleshooting issue involved Ubuntu naming the mirrored interface `ens19`, while my original Suricata configuration referenced `eth19`. After correcting the interface configuration, Suricata, to my great relief, immediately began processing mirrored traffic and generating alerts.
 
 One of my future goals is to begin writing custom Suricata detection rules as I continue expanding the lab.
 
@@ -111,7 +111,7 @@ One of my future goals is to begin writing custom Suricata detection rules as I 
 
 ## Zeek
 
-Rather than running Zeek continuously, I chose to use it as an on-demand investigation platform.
+Rather than running Zeek continuously, I chose to use it as an investigation platform.
 
 Packet captures stored by Arkime can be analyzed with Zeek whenever deeper protocol visibility is required. This approach reduces CPU utilization while still providing access to Zeek's rich protocol metadata during investigations.
 
@@ -132,9 +132,9 @@ This allows me to examine protocol behavior without manually reviewing every pac
 
 SiLK provides another important layer by converting packet captures into searchable flow records.
 
-While Arkime preserves every packet, SiLK summarizes communication into compact flow records that can be searched extremely quickly across large datasets.
+While Arkime captures every packet, SiLK summarizes communication into flow records that I can quickly search.
 
-We spent considerable time working with SiLK during GCIA, but assembling the entire toolchain proved far more challenging than I expected.
+I spent considerable time working with SiLK during GCIA, but assembling the entire toolchain proved more ~~frustrating~~ challenging than I expected.
 
 After compiling Carnegie Mellon's latest release from source, I built the following pipeline:
 
@@ -148,14 +148,14 @@ IPFIX
 SiLK Flow Records
 ```
 
-This enables high-speed analysis using tools such as:
+This enables high-speed analysis using tools like:
 
 - rwcut
 - rwfilter
 - rwstats
 - rwfileinfo
 
-Flow data complements packet captures by allowing analysts to identify scanning behavior, lateral movement, and communication patterns without immediately examining individual packets.
+Flow data complements packet captures by allowing analysts to identify scanning behavior, lateral movement, and communication patterns without first examining individual packets.
 
 ---
 
@@ -181,15 +181,13 @@ After deploying the monitoring platform, I generated test traffic from Kali Linu
 - SMB traffic
 - Various TCP protocol connections
 
-Rather than assuming the pipeline was functioning correctly, I independently validated each layer.
+I independently validated that each layer was functioning correctly:
 
 - tcpdump confirmed mirrored traffic reached the sensor.
 - Arkime reconstructed captured sessions.
 - Suricata generated IDS alerts.
 - SiLK produced searchable flow records.
 - Wireshark decoded the captured traffic.
-
-Seeing each tool independently observe the same activity gave me confidence that the monitoring pipeline was functioning correctly end-to-end.
 
 ---
 
@@ -211,7 +209,7 @@ One of the most valuable parts of this project was the troubleshooting process.
 
 Some of the challenges included:
 
-- Validating the Open vSwitch mirror configuration
+- Validating the open vSwitch mirror configuration
 - Verifying packet capture with tcpdump before introducing additional tools
 - Diagnosing incomplete packet captures
 - Rebuilding portions of the Arkime configuration
@@ -220,8 +218,6 @@ Some of the challenges included:
 - Configuring SiLK site configuration files
 - Understanding how YAF exports IPFIX and how SiLK converts those records into flow data
 - Validating that every stage of the monitoring pipeline was functioning correctly
-
-Working through these issues reinforced an important lesson: effective troubleshooting requires validating every stage independently rather than assuming data is flowing correctly through the pipeline.
 
 ---
 
@@ -238,13 +234,13 @@ Each component answers a different investigative question.
 | Zeek | Protocol metadata |
 | SiLK | Network flow analytics |
 
-Together, these tools provide multiple perspectives of the same network activity, enabling much more effective investigations than any individual tool could provide alone.
+Together, these tools provide multiple perspectives of the same network activity, enabling more effective investigations than any individual tool could provide alone.
 
 ---
 
 # Example Investigation Workflow
 
-A typical investigation in this lab now follows a layered workflow:
+For example, an investigation will follow the following workflow:
 
 ```text
 Nmap Scan
@@ -280,13 +276,13 @@ Wireshark
 (Deep packet analysis)
 ```
 
-Each layer contributes unique context, allowing me to move from broad threat hunting to packet-level forensic analysis.
+Each layer contributes context, allowing me to move from broad threat hunting to packet-level analysis.
 
 ---
 
 # Future Work
 
-This lab is intended to serve as the foundation for future projects involving:
+My lab will serve as the foundation for future projects involving:
 
 - Malware traffic analysis
 - Command-and-control detection
