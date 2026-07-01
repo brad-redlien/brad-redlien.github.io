@@ -62,9 +62,16 @@ The lab consists of:
 Traffic never passes through the sensor directly. Instead, the Open vSwitch creates a mirrored copy of traffic between the attacker and target systems. This mimics how production network taps and SPAN ports operate.
 
 ---
+
 **Figure 1 – Proxmox Virtual Environment**
 
 ![Proxmox](/assets/img/network-security-monitoring-lab/proxmox-overview.png)
+
+---
+
+**Figure 2 – Network Architecture**
+
+![Lab Network Topology](/assets/img/network-security-monitoring-lab/network-topology.png)
 
 ---
 
