@@ -45,16 +45,9 @@ The lab consists of:
 Traffic never passes through the sensor directly. Instead, the open vSwitch creates a mirrored copy of traffic between the attacker and target systems. This mimics how production network taps and SPAN ports operate.
 
 ---
-
 **Figure 1 – Proxmox Virtual Environment**
 
-*Insert Proxmox VM screenshot here*
-
----
-
-**Figure 2 – Network Architecture**
-
-*Insert network diagram here*
+![Proxmox](/assets/img/network-security-monitoring-lab/1.png)
 
 ---
 
@@ -78,9 +71,11 @@ Rather than relying solely on IDS alerts, I can retrieve the complete packet his
 
 ---
 
-**Figure 3 – Arkime Session Reconstruction**
+**Figure 3 – Arkime Session**
 
-*Insert Arkime HTTP session screenshot*
+![Arkime Session](/assets/img/network-security-monitoring-lab/3.png)
+
+![Arkime Session](/assets/img/network-security-monitoring-lab/4.png)
 
 ---
 
@@ -105,7 +100,7 @@ One of my future goals is to begin writing custom Suricata detection rules as I 
 
 **Figure 4 – Suricata Eve JSON Alerts**
 
-*Insert jq eve.json screenshot*
+![Suricata](/assets/img/network-security-monitoring-lab/6.png)
 
 ---
 
@@ -161,13 +156,13 @@ Flow data complements packet captures by allowing analysts to identify scanning 
 
 **Figure 5 – SiLK Flow Records (rwcut)**
 
-*Insert rwcut screenshot*
+![SiLK](/assets/img/network-security-monitoring-lab/8.png)
 
 ---
 
 **Figure 6 – SiLK Statistics (rwstats)**
 
-*Insert rwstats screenshot*
+![SiLK](/assets/img/network-security-monitoring-lab/9.png)
 
 ---
 
@@ -193,13 +188,13 @@ I independently validated that each layer was functioning correctly:
 
 **Figure 7 – tcpdump Validating Mirrored Traffic**
 
-*Insert tcpdump screenshot*
+![tcpdump](/assets/img/network-security-monitoring-lab/11.png)
 
 ---
 
 **Figure 8 – Wireshark Verification**
 
-*Insert Wireshark screenshot*
+![Wireshark](/assets/img/network-security-monitoring-lab/5.png)
 
 ---
 
