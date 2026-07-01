@@ -43,7 +43,7 @@ Rather than deploying a single appliance, I decided to build the monitoring pipe
 
 ---
 
-# Goals
+## Goals
 
 My objectives for this lab were to:
 
@@ -58,7 +58,7 @@ My objectives for this lab were to:
 
 ---
 
-# Lab Architecture
+## Lab Architecture
 
 I host the lab environment on a Proxmox virtualization server running on a repurposed System76 Pangolin 10 laptop upgraded with additional memory.
 
@@ -87,7 +87,7 @@ Traffic never passes through the sensor directly. Instead, the Open vSwitch crea
 
 ---
 
-# Technology Stack
+## Technology Stack
 
 ## Arkime
 
@@ -202,7 +202,7 @@ Flow data complements packet captures by allowing analysts to identify scanning 
 
 ---
 
-# Traffic Validation
+## Traffic Validation
 
 After deploying the monitoring platform, I generated test traffic from Kali Linux including:
 
@@ -234,7 +234,7 @@ Rather than assuming the platform was working correctly, I independently validat
 
 ---
 
-# Challenges Encountered
+## Challenges Encountered
 
 One of the most valuable parts of this project was the troubleshooting process.
 
@@ -252,7 +252,7 @@ Some of the challenges included:
 
 ---
 
-# Lessons Learned
+## Lessons Learned
 
 One of the major lessons from GCIA is that no single tool provides complete visibility into network activity.
 
@@ -277,7 +277,7 @@ Together, these tools provide multiple perspectives of the same network activity
 
 ---
 
-# Example Investigation Workflow
+## Example Investigation Workflow
 
 A typical investigation in my lab follows this workflow:
 
@@ -320,7 +320,7 @@ Each layer contributes context, allowing me to move from broad threat hunting to
 
 ---
 
-# Future Work
+## Future Work
 
 My lab will serve as the foundation for future projects involving:
 
@@ -338,7 +338,7 @@ Each of these topics will become its own portfolio article as the lab continues 
 
 ---
 
-# Conclusion
+## Conclusion
 
 Building this platform reinforced that effective network investigations rely on multiple complementary sources of telemetry.
 
