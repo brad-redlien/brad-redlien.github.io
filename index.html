@@ -4,100 +4,127 @@ title: Brad Redlien
 subtitle: Security Operations | Incident Response | Network Security Monitoring | Detection Engineering | Vulnerability Management | GIAC GCIA, GCIH, GPYC, GSEC, GFACT | CRISC Exam Passed
 ---
 
-## Welcome
+<p>
+After nearly twenty years practicing law, I transitioned into cybersecurity through the SANS Technology Institute, where I've focused on security operations, incident response, network traffic analysis, and cyber risk management.
+</p>
 
-Thank you for visiting my cybersecurity portfolio.
+<p>
+This website documents the projects I've completed while building practical experience in Blue Team operations. Most of the work is performed in my own Proxmox-based home lab, where I build security tooling from the ground up and validate each stage of the telemetry pipeline through hands-on testing and investigation.
+</p>
 
-After nearly twenty years practicing law, I transitioned into cybersecurity through the SANS Technology Institute, where I've focused on security operations, incident response, network traffic analysis, and cyber risk management. This website documents the hands-on projects I've completed as I continue building practical experience in Blue Team operations.
+<p>
+My long-term interests include network security monitoring, detection engineering, malware analysis, threat hunting, and digital forensics.
+</p>
 
-Most of the work you'll find here is built in my own Proxmox home lab and emphasizes understanding how security technologies work beneath the surface rather than simply deploying them. I enjoy building environments from the ground up, troubleshooting each component, and validating that every stage of the telemetry pipeline works as expected.
+<hr>
 
-My long-term goal is to continue expanding this portfolio with projects involving malware analysis, threat hunting, detection engineering, digital forensics, and network security monitoring.
-
----
-
-# Featured Project
+<h2>Featured Project</h2>
 
 <article class="post-preview">
-  <h2 class="post-title">
-    <a href="{{ '/projects/network-security-monitoring-lab/' | relative_url }}">
-      Building an Enterprise Network Security Monitoring Lab with Proxmox, Arkime, Suricata, Zeek, and SiLK
-    </a>
-  </h2>
 
-  <p class="post-meta">Posted on June 30, 2026</p>
+<h2 class="post-title">
+<a href="{{ '/projects/network-security-monitoring-lab/' | relative_url }}">
+Building an Enterprise Network Security Monitoring Lab with Proxmox, Arkime, Suricata, Zeek, and SiLK
+</a>
+</h2>
 
-  <p>
-    Following completion of the SANS GCIA (GIAC Certified Intrusion Analyst) certification, I designed and built an enterprise-style Network Security Monitoring (NSM) platform to better understand how packet capture, intrusion detection, protocol analysis, and network flow analytics work together during real-world investigations.
-  </p>
+<p class="post-meta">
+June 30, 2026
+</p>
 
-  <p>
-    Rather than deploying an all-in-one appliance, I assembled the monitoring pipeline myself using Proxmox, Open vSwitch, Arkime, Suricata, Zeek, SiLK, and YAF. The project documents the complete telemetry pipeline—from mirrored network traffic and full packet capture to IDS alerts, protocol metadata, and searchable flow records—while also describing the troubleshooting required to validate each stage.
-  </p>
+<p>
+Following completion of the SANS GCIA certification, I designed and built an enterprise-style Network Security Monitoring (NSM) platform to better understand how packet capture, intrusion detection, protocol analysis, and network flow analytics work together during real-world investigations.
+</p>
 
-  <p>
-    The completed lab now serves as the foundation for future projects involving malware analysis, threat hunting, detection engineering, and incident response investigations.
-  </p>
+<p>
+Rather than deploying an all-in-one appliance, I assembled the monitoring pipeline myself using Proxmox, Open vSwitch, Arkime, Suricata, Zeek, SiLK, and YAF. The project documents the complete telemetry pipeline—from mirrored traffic and full packet capture through IDS alerting, protocol metadata, and searchable flow records—along with the troubleshooting required to validate each stage.
+</p>
 
-  <p><a href="{{ '/projects/network-security-monitoring-lab/' | relative_url }}"><strong>Read the Full Project →</strong></a></p>
+<p>
+The completed lab now serves as the foundation for future malware analysis, threat hunting, detection engineering, and incident response projects.
+</p>
+
+<p>
+<a href="{{ '/projects/network-security-monitoring-lab/' | relative_url }}"><strong>Read the Full Project →</strong></a>
+</p>
+
 </article>
 
 <hr>
 
-# Additional Projects
+<h2>Additional Projects</h2>
 
 <article class="post-preview">
-  <h2 class="post-title">
-    <a href="{{ '/projects/metasploit-psexec/' | relative_url }}">
-      Blue Team Investigation of a Simulated Metasploit PsExec Attack
-    </a>
-  </h2>
 
-  <p class="post-meta">Posted on August 11, 2025</p>
+<h2 class="post-title">
+<a href="{{ '/projects/metasploit-psexec/' | relative_url }}">
+Blue Team Investigation of a Simulated Metasploit PsExec Attack
+</a>
+</h2>
 
-  <p>
-    Simulated a Metasploit PsExec compromise against a Windows 10 virtual machine and conducted a complete blue team investigation using Sysmon and PowerShell. The project documents malicious service creation, process execution chains, credential dumping, command-and-control activity, and Netcat persistence while demonstrating an end-to-end incident response workflow.
-  </p>
+<p class="post-meta">
+August 11, 2025
+</p>
 
-  <p><a href="{{ '/projects/metasploit-psexec/' | relative_url }}"><strong>Read More →</strong></a></p>
+<p>
+Simulated a Metasploit PsExec compromise against a Windows 10 virtual machine and performed an end-to-end incident response investigation using Sysmon and PowerShell. The project documents malicious service creation, process execution chains, credential dumping, command-and-control activity, and Netcat persistence.
+</p>
+
+<p>
+<a href="{{ '/projects/metasploit-psexec/' | relative_url }}"><strong>Read More →</strong></a>
+</p>
+
 </article>
 
 <hr>
 
 <article class="post-preview">
-  <h2 class="post-title">
-    <a href="{{ '/projects/netcat-named-pipes/' | relative_url }}">
-      Creating and Defending Against Netcat Backdoor Shells with Named Pipes
-    </a>
-  </h2>
 
-  <p class="post-meta">Posted on July 17, 2025</p>
+<h2 class="post-title">
+<a href="{{ '/projects/netcat-named-pipes/' | relative_url }}">
+Creating and Defending Against Netcat Backdoor Shells with Named Pipes
+</a>
+</h2>
 
-  <p>
-    Built a Linux lab to understand how attackers create Netcat login shells and reverse shells using named pipes after removal of the traditional <code>-e</code> option. The project demonstrates both offensive techniques and practical detection and mitigation strategies for defenders.
-  </p>
+<p class="post-meta">
+July 17, 2025
+</p>
 
-  <p><a href="{{ '/projects/netcat-named-pipes/' | relative_url }}"><strong>Read More →</strong></a></p>
+<p>
+Built a Linux lab to understand how attackers create Netcat login shells and reverse shells using named pipes after removal of the traditional <code>-e</code> option. The project demonstrates both offensive techniques and practical detection and mitigation strategies for defenders.
+</p>
+
+<p>
+<a href="{{ '/projects/netcat-named-pipes/' | relative_url }}"><strong>Read More →</strong></a>
+</p>
+
 </article>
 
 <hr>
 
 <article class="post-preview">
-  <h2 class="post-title">
-    <a href="/ctfs/">
-      National Cyber League Spring 2025 Team Game
-    </a>
-  </h2>
 
-  <p class="post-meta">Posted on May 1, 2025</p>
+<h2 class="post-title">
+<a href="/ctfs/">
+National Cyber League Spring 2025 Team Game
+</a>
+</h2>
 
-  <img src="/assets/img/NCL-Team-Game.png"
-       alt="NCL Spring 2025 Team Game"
-       style="max-width:100%; height:auto; margin:1em 0;" />
+<p class="post-meta">
+May 1, 2025
+</p>
 
-  <p>
-    Competed with six SANS Technology Institute classmates in the National Cyber League Spring 2025 Team Game, placing <strong>63rd out of 4,798 teams nationwide</strong> (top <strong>1.3%</strong>). Challenges included network traffic analysis, reconnaissance, digital forensics, password cracking, web exploitation, and log analysis.
-  </p>
+<img
+src="/assets/img/NCL-Team-Game.png"
+alt="National Cyber League Spring 2025 Team Game"
+style="max-width:100%; height:auto; margin:1em 0; border-radius:12px;">
 
-  <p><a href="/ctfs/"><strong>Read More →</strong></a></p>
+<p>
+Competed with six SANS Technology Institute classmates in the National Cyber League Spring 2025 Team Game, placing <strong>63rd out of 4,798 teams nationwide</strong> (top <strong>1.3%</strong>). Challenges included network traffic analysis, digital forensics, reconnaissance, password cracking, and web exploitation.
+</p>
+
+<p>
+<a href="/ctfs/"><strong>Read More →</strong></a>
+</p>
+
 </article>
