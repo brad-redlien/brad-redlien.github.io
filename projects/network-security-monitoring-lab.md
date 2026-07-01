@@ -1,6 +1,5 @@
 ---
-layout: page
-title: "Building an Enterprise Network Security Monitoring Lab"
+title: "Building a Network Security Monitoring Lab"
 permalink: /projects/network-security-monitoring-lab/
 ---
 
