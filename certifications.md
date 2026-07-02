@@ -6,12 +6,11 @@ permalink: /certifications/
 
 Cybersecurity certifications focused on intrusion analysis, incident response, network defense, cloud technologies, and enterprise security operations. I earned the GIAC certifications through the SANS Technology Institute Bachelor of Applied Cybersecurity program.
 
-## Certifications
-
 ### Cybersecurity Certifications
 
 - **GCIA** (GIAC Certified Intrusion Analyst)
 - **GCIH** (GIAC Certified Incident Handler)
+- **GPYC** (GIAC Python Coder) 
 - **GSEC** (GIAC Security Essentials Certification)
 - **CompTIA Security+**
 - **GISF** (GIAC Information Security Fundamentals)
@@ -35,6 +34,8 @@ You can view and verify my badges directly on my [Credly Profile](https://www.cr
 <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="010e620e-4b91-42ea-86a9-6a9c04314f8b" data-share-badge-host="https://www.credly.com"></div>
 
 <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="19d48528-ac66-4988-ab16-836ce5dc8aae" data-share-badge-host="https://www.credly.com"></div>
+
+<div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="7eac636b-c785-4244-83d0-01fd4f58d7f2" data-share-badge-host="https://www.credly.com">
   
 <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="4c24c1bc-5e01-4030-89df-50a01366dc49" data-share-badge-host="https://www.credly.com"></div>
 
