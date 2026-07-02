@@ -117,7 +117,7 @@ body.light-mode pre, body.light-mode code {
 /* ------------------------------------------------------
    Auto Dark Mode Based on System Preference
    (applies when OS/browser prefers light AND the user has
-   NOT manually toggled — this is the default state for most
+   NOT manually toggled â€” this is the default state for most
    visitors, since most people never touch a theme switch)
 ------------------------------------------------------ */
 @media (prefers-color-scheme: light) {
@@ -209,7 +209,7 @@ h2, h3, h4 {
      body.light-mode .navbar,
      @media (prefers-color-scheme: light) { ... }
 
-   That is not valid CSS syntax — a selector and an at-rule can't
+   That is not valid CSS syntax â€” a selector and an at-rule can't
    share a comma-separated list. Each pair below is now split into
    two independent, valid rules: one gated by the manual-toggle
    class, one gated by the system-preference media query. */
@@ -306,7 +306,7 @@ body.light-mode {
    class. Without this, any component styled with var(--link),
    var(--muted), var(--surface), etc. (cards, buttons, figcaptions,
    table borders) silently stayed dark-mode-colored for anyone who
-   reached light mode via system preference instead of the toggle —
+   reached light mode via system preference instead of the toggle â€”
    the same root cause as the heading bug, just for other elements. */
 @media (prefers-color-scheme: light) {
   body:not(.light-mode) {
@@ -325,7 +325,11 @@ body.light-mode {
 body { color: var(--fg); line-height: 1.65; }
 
 /* Constrain readable width for posts */
-.container, .post-content { max-width: 880px; }
+/* FIX: max-width alone doesn't center a block-level element â€” without
+   margin: 0 auto, .post-content hugs the left edge of its parent
+   container and leaves a large dead gap on the right on any screen
+   wider than ~880px. */
+.container, .post-content { max-width: 880px; margin: 0 auto; }
 
 /* Headings: scale + spacing */
 h1 { font-weight: 800; letter-spacing: -.01em; margin: var(--gap-5) 0 var(--gap-3); }
@@ -358,6 +362,22 @@ a:focus-visible {
 .card:hover, .post-preview:hover {
   transform: translateY(-2px);
   transition: transform .18s ease, box-shadow .18s ease;
+}
+
+/* FIX: Beautiful Jekyll's own theme ships ".post-preview a { color:
+   var(--text-col) }", which has higher CSS specificity than the plain
+   "a { color: var(--link) }" rule above, so it silently won regardless
+   of load order. That rendered every project title and "Read More"
+   link as low-contrast grey (~1.7:1 against the dark card background,
+   below the 4.5:1 WCAG AA minimum) instead of the intended link blue.
+   Matching its specificity here restores the intended color. */
+.post-preview a,
+.post-preview .post-title a {
+  color: var(--link);
+}
+.post-preview a:hover,
+.post-preview .post-title a:hover {
+  color: var(--link-hover);
 }
 
 .btn, .btn-primary, .btn-default {
@@ -424,7 +444,7 @@ th { text-align: left; font-weight: 700; }
    light/dark mode (dark navy background + light text is a paired,
    self-consistent combo, so it's not a readability bug like the
    headings were). It does mean tables render as a dark card even
-   on an otherwise light page — a stylistic inconsistency, not a
+   on an otherwise light page â€” a stylistic inconsistency, not a
    contrast bug. Worth a look later if you want full visual
    consistency in light mode, but not urgent. */
 
