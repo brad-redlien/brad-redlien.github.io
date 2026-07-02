@@ -85,6 +85,7 @@ a:hover, a:visited, .navbar-brand, blockquote {
 
 /* ------------------------------------------------------
    Accessibility/Mode Toggle - Light Mode Overrides
+   (applies when JS adds body.light-mode via manual toggle)
 ------------------------------------------------------ */
 body.light-mode {
   background-color: #f8f9fa;
@@ -115,11 +116,31 @@ body.light-mode pre, body.light-mode code {
 
 /* ------------------------------------------------------
    Auto Dark Mode Based on System Preference
+   (applies when OS/browser prefers light AND the user has
+   NOT manually toggled — this is the default state for most
+   visitors, since most people never touch a theme switch)
 ------------------------------------------------------ */
 @media (prefers-color-scheme: light) {
   body:not(.light-mode) {
     background-color: #f8f9fa;
     color: #212529;
+  }
+
+  /* FIX: headings were previously hardcoded to #fff globally
+     with no override here, causing white-on-light-background
+     text for any visitor on system light mode who hadn't
+     manually toggled the site's theme. */
+  body:not(.light-mode) h1,
+  body:not(.light-mode) h2,
+  body:not(.light-mode) h3,
+  body:not(.light-mode) h4,
+  body:not(.light-mode) h5,
+  body:not(.light-mode) h6 {
+    color: #003366;
+  }
+
+  body:not(.light-mode) a {
+    color: #0056b3;
   }
 }
 
@@ -181,10 +202,26 @@ h2, h3, h4 {
   outline-offset: 2px;
 }
 
-/* ===== Light mode specifics ===== */
-body.light-mode .navbar,
+/* ===== Light mode specifics =====
+   FIX: each of the four blocks below previously tried to join a
+   class selector and an @media rule with a comma, e.g.:
+
+     body.light-mode .navbar,
+     @media (prefers-color-scheme: light) { ... }
+
+   That is not valid CSS syntax — a selector and an at-rule can't
+   share a comma-separated list. Each pair below is now split into
+   two independent, valid rules: one gated by the manual-toggle
+   class, one gated by the system-preference media query. */
+
+body.light-mode .navbar {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+}
+
 @media (prefers-color-scheme: light) {
-  body:not(.light-mode) .navbar /* fallback if system is light */ {
+  body:not(.light-mode) .navbar {
     background-color: #ffffff !important;
     border-bottom: 1px solid #e5e7eb !important;
     box-shadow: 0 2px 4px rgba(0,0,0,0.06);
@@ -193,25 +230,36 @@ body.light-mode .navbar,
 
 body.light-mode .navbar .navbar-brand,
 body.light-mode .navbar .nav > li > a,
-body.light-mode .navbar .navbar-nav > li > a,
+body.light-mode .navbar .navbar-nav > li > a {
+  color: #0f172a !important;                  /* near-black on white */
+}
+
 @media (prefers-color-scheme: light) {
   body:not(.light-mode) .navbar .navbar-brand,
   body:not(.light-mode) .navbar .nav > li > a,
   body:not(.light-mode) .navbar .navbar-nav > li > a {
-    color: #0f172a !important;                /* near-black on white */
+    color: #0f172a !important;
   }
 }
 
-body.light-mode .navbar .nav > li > a:hover,
+body.light-mode .navbar .nav > li > a:hover {
+  color: #1d4ed8 !important;                  /* accessible hover */
+  text-decoration: underline;
+}
+
 @media (prefers-color-scheme: light) {
   body:not(.light-mode) .navbar .nav > li > a:hover {
-    color: #1d4ed8 !important;                /* accessible hover */
+    color: #1d4ed8 !important;
     text-decoration: underline;
   }
 }
 
 body.light-mode .navbar .fa,
-body.light-mode .navbar svg,
+body.light-mode .navbar svg {
+  color: currentColor !important;
+  fill: currentColor !important;
+}
+
 @media (prefers-color-scheme: light) {
   body:not(.light-mode) .navbar .fa,
   body:not(.light-mode) .navbar svg {
@@ -252,6 +300,25 @@ body.light-mode {
   --border: #e5e7eb;
   --surface: #ffffff;
   --shadow: 0 10px 24px rgba(2,6,23,.08);
+}
+
+/* FIX: the token block above only fires for the manual .light-mode
+   class. Without this, any component styled with var(--link),
+   var(--muted), var(--surface), etc. (cards, buttons, figcaptions,
+   table borders) silently stayed dark-mode-colored for anyone who
+   reached light mode via system preference instead of the toggle —
+   the same root cause as the heading bug, just for other elements. */
+@media (prefers-color-scheme: light) {
+  body:not(.light-mode) {
+    --bg: #ffffff;
+    --fg: #0f172a;
+    --muted: #475569;
+    --link: #1d4ed8;
+    --link-hover: #2563eb;
+    --border: #e5e7eb;
+    --surface: #ffffff;
+    --shadow: 0 10px 24px rgba(2,6,23,.08);
+  }
 }
 
 /* Base rhythm */
@@ -352,7 +419,14 @@ th { text-align: left; font-weight: 700; }
   * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
 }
 
-/* ===== Project tables: dark theme fix ===== */
+/* ===== Project tables: dark theme fix =====
+   NOTE: these tables are intentionally styled dark regardless of
+   light/dark mode (dark navy background + light text is a paired,
+   self-consistent combo, so it's not a readability bug like the
+   headings were). It does mean tables render as a dark card even
+   on an otherwise light page — a stylistic inconsistency, not a
+   contrast bug. Worth a look later if you want full visual
+   consistency in light mode, but not urgent. */
 
 .post-content table,
 .post-content table.table {
